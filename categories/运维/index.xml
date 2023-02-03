@@ -6,14 +6,32 @@
     <description>Recent content in 运维 on Yang’s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 03 Feb 2023 18:09:16 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/%E8%BF%90%E7%BB%B4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Feb 2023 18:23:18 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/%E8%BF%90%E7%BB%B4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>将本地博客托管到Github Pages上</title>
+      <link>http://localhost:1313/post/hugo_2/</link>
+      <pubDate>Fri, 03 Feb 2023 18:23:18 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/hugo_2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>把博客托管到vercel平台</title>
+      <link>http://localhost:1313/post/hugo_3/</link>
+      <pubDate>Fri, 03 Feb 2023 18:23:15 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/hugo_3/</guid>
+      <description>网站部署到github的问题 国内访问慢，有些地区甚至不能访问。 Github禁止百度抓取，意味着网站无法在百度搜到。 Vercel部署的好处 关联</description>
+    </item>
+    
     <item>
       <title>使用Hugo配置博客</title>
       <link>http://localhost:1313/post/hugo_1/</link>
       <pubDate>Fri, 03 Feb 2023 18:09:16 +0800</pubDate>
       
       <guid>http://localhost:1313/post/hugo_1/</guid>
-      <description>使用hugo配置博客 hugo简介 Hugo，也就是静态网站生成框架，构建了一套代码生成框架和各种可选的主题。可以帮助我们自动搭建好我们的个人博</description>
+      <description>hugo简介 Hugo，也就是静态网站生成框架，构建了一套代码生成框架和各种可选的主题。可以帮助我们自动搭建好我们的个人博客网站，不需要关注任</description>
     </item>
     
   </channel>

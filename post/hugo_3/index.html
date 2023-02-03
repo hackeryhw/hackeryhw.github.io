@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>My First Post - Yang’s Blog</title>
+  <title>把博客托管到vercel平台 - Yang’s Blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="杨浩伟" /><meta name="description" content="# 这是我的第一篇博客 这是我的第一篇博客 个人网站链接" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="杨浩伟" /><meta name="description" content="网站部署到github的问题 国内访问慢，有些地区甚至不能访问。 Github禁止百度抓取，意味着网站无法在百度搜到。 Vercel部署的好处 关联" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.110.0 with theme even" />
 
 
-<link rel="canonical" href="http://localhost:1313/post/my-first-post/" />
+<link rel="canonical" href="http://localhost:1313/post/hugo_3/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,19 +39,19 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="My First Post" />
-<meta property="og:description" content="# 这是我的第一篇博客 这是我的第一篇博客 个人网站链接" />
+<meta property="og:title" content="把博客托管到vercel平台" />
+<meta property="og:description" content="网站部署到github的问题 国内访问慢，有些地区甚至不能访问。 Github禁止百度抓取，意味着网站无法在百度搜到。 Vercel部署的好处 关联" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/post/my-first-post/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2023-02-03T08:52:49+08:00" />
-<meta property="article:modified_time" content="2023-02-03T08:52:49+08:00" />
-<meta itemprop="name" content="My First Post">
-<meta itemprop="description" content="# 这是我的第一篇博客 这是我的第一篇博客 个人网站链接"><meta itemprop="datePublished" content="2023-02-03T08:52:49+08:00" />
-<meta itemprop="dateModified" content="2023-02-03T08:52:49+08:00" />
-<meta itemprop="wordCount" content="25">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="My First Post"/>
-<meta name="twitter:description" content="# 这是我的第一篇博客 这是我的第一篇博客 个人网站链接"/>
+<meta property="og:url" content="http://localhost:1313/post/hugo_3/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-03T18:23:15+08:00" />
+<meta property="article:modified_time" content="2023-02-03T18:23:15+08:00" />
+<meta itemprop="name" content="把博客托管到vercel平台">
+<meta itemprop="description" content="网站部署到github的问题 国内访问慢，有些地区甚至不能访问。 Github禁止百度抓取，意味着网站无法在百度搜到。 Vercel部署的好处 关联"><meta itemprop="datePublished" content="2023-02-03T18:23:15+08:00" />
+<meta itemprop="dateModified" content="2023-02-03T18:23:15+08:00" />
+<meta itemprop="wordCount" content="597">
+<meta itemprop="keywords" content="运维," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="把博客托管到vercel平台"/>
+<meta name="twitter:description" content="网站部署到github的问题 国内访问慢，有些地区甚至不能访问。 Github禁止百度抓取，意味着网站无法在百度搜到。 Vercel部署的好处 关联"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -124,12 +124,12 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">My First Post</h1>
+      <h1 class="post-title">把博客托管到vercel平台</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2023-02-03 </span>
         <div class="post-category">
-            <a href="/categories/logo/"> Logo </a>
+            <a href="/categories/%E8%BF%90%E7%BB%B4/"> 运维 </a>
             </div>
         
       </div>
@@ -138,11 +138,60 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#网站部署到github的问题">网站部署到github的问题</a></li>
+        <li><a href="#vercel部署的好处">Vercel部署的好处</a></li>
+        <li><a href="#如何部署到vercel">如何部署到Vercel</a>
+          <ul>
+            <li><a href="#目标文件托管">目标文件托管：</a></li>
+            <li><a href="#源码托管todo">源码托管：TODO</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
-      <p># 这是我的第一篇博客 这是我的第一篇<strong>博客</strong> <a href="https://leftpocket.cn">个人网站链接</a></p>
+      <h2 id="网站部署到github的问题">网站部署到github的问题</h2>
+<ul>
+<li>国内访问慢，有些地区甚至不能访问。</li>
+<li>Github禁止百度抓取，意味着网站无法在百度搜到。</li>
+</ul>
+<h2 id="vercel部署的好处">Vercel部署的好处</h2>
+<ul>
+<li><strong>关联 github</strong>，意味着不需要过多额外的动作。只需要往 github 提交代码，它会自动获取最新的提交，然后自动部署</li>
+<li><strong>提供了免费的域名</strong>，省去了申请域名的问题，如果有自己的域名，还可以做个域名解析到这个平台上</li>
+<li><strong>提供了免费的 Https 证书</strong>，如果证书到期了，它会自动替换，完全不需要操心</li>
+<li><strong>傻瓜式的部署方式</strong>，它的操作非常简单，Vercel 提供了两种方式：通过命令行部署、通过 Vercel 提供管理后台部署。</li>
+</ul>
+<h2 id="如何部署到vercel">如何部署到Vercel</h2>
+<p>想要把自己的博客部署到Vercel，有两种方式：</p>
+<ol>
+<li><strong>源码托管</strong>，不使用hugo编译，Vercel会自动编译成目标文件。(vercel会执行hugo命令来编译成HTML文件)</li>
+<li><strong>目标文件托管</strong>，把Github Pages （HTML文件）导入Vercel。较简单。</li>
+</ol>
+<h3 id="目标文件托管">目标文件托管：</h3>
+<p>方法：将Github上的xx.github.io仓库导入vercel即可。</p>
+<ol>
+<li>
+<p>创建项目![Screen Shot 2023-02-03 at 18.53.40](/Volumes/ExtremeSSD/Github.io/hackeryhw/static/img/Screen Shot 2023-02-03 at 18.53.40.png)</p>
+</li>
+<li>
+<p>导入Git仓库。![Screen Shot 2023-02-03 at 18.55.16](/Volumes/ExtremeSSD/Github.io/hackeryhw/static/img/Screen Shot 2023-02-03 at 18.55.16.png)</p>
+</li>
+<li>
+<p>选择github.io仓库导入，框架类型选择other，然后Deploy。![Screen Shot 2023-02-03 at 18.57.43](/Users/yangyanghaowei/Library/Application Support/typora-user-images/Screen Shot 2023-02-03 at 18.57.43.png)</p>
+</li>
+<li>
+<p>目标文件托管完成。网页域名：https://hackeryhw-github-io.vercel.app![Screen Shot 2023-02-03 at 18.59.29](/Users/yangyanghaowei/Library/Application Support/typora-user-images/Screen Shot 2023-02-03 at 18.59.29.png)</p>
+</li>
+</ol>
+<h3 id="源码托管todo">源码托管：TODO</h3>
 
     </div>
 
@@ -162,14 +211,20 @@
   
 </div>
 <footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="/tags/%E8%BF%90%E7%BB%B4/">运维</a>
+          </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/hugo_1/">
+        <a class="prev" href="/post/hugo_2/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">使用Hugo配置博客</span>
+            <span class="prev-text nav-default">将本地博客托管到Github Pages上</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        
+        <a class="next" href="/post/hugo_1/">
+            <span class="next-text nav-default">使用Hugo配置博客</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
       </nav>
     </footer>
   </article>

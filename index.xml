@@ -6,23 +6,95 @@
     <description>Recent content on Yang’s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 03 Feb 2023 18:09:16 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Feb 2023 19:53:55 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Yolov7</title>
+      <link>http://localhost:1313/post/yolov7/</link>
+      <pubDate>Fri, 03 Feb 2023 19:53:55 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/yolov7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Yolov6</title>
+      <link>http://localhost:1313/post/yolov6/</link>
+      <pubDate>Fri, 03 Feb 2023 19:53:52 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/yolov6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Yolov5</title>
+      <link>http://localhost:1313/post/yolov5/</link>
+      <pubDate>Fri, 03 Feb 2023 19:53:49 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/yolov5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Yolov4</title>
+      <link>http://localhost:1313/post/yolov4/</link>
+      <pubDate>Fri, 03 Feb 2023 19:53:46 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/yolov4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Yolov3</title>
+      <link>http://localhost:1313/post/yolov3/</link>
+      <pubDate>Fri, 03 Feb 2023 19:53:44 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/yolov3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Yolov2</title>
+      <link>http://localhost:1313/post/yolov2/</link>
+      <pubDate>Fri, 03 Feb 2023 19:53:42 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/yolov2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Yolov1</title>
+      <link>http://localhost:1313/post/yolov1/</link>
+      <pubDate>Fri, 03 Feb 2023 19:53:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/yolov1/</guid>
+      <description>Yolo-v1: Free-anchor v1： 每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对</description>
+    </item>
+    
+    <item>
+      <title>将本地博客托管到Github Pages上</title>
+      <link>http://localhost:1313/post/hugo_2/</link>
+      <pubDate>Fri, 03 Feb 2023 18:23:18 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/hugo_2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>把博客托管到vercel平台</title>
+      <link>http://localhost:1313/post/hugo_3/</link>
+      <pubDate>Fri, 03 Feb 2023 18:23:15 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/hugo_3/</guid>
+      <description>网站部署到github的问题 国内访问慢，有些地区甚至不能访问。 Github禁止百度抓取，意味着网站无法在百度搜到。 Vercel部署的好处 关联</description>
+    </item>
+    
     <item>
       <title>使用Hugo配置博客</title>
       <link>http://localhost:1313/post/hugo_1/</link>
       <pubDate>Fri, 03 Feb 2023 18:09:16 +0800</pubDate>
       
       <guid>http://localhost:1313/post/hugo_1/</guid>
-      <description>使用hugo配置博客 hugo简介 Hugo，也就是静态网站生成框架，构建了一套代码生成框架和各种可选的主题。可以帮助我们自动搭建好我们的个人博</description>
-    </item>
-    
-    <item>
-      <title>Test</title>
-      <link>http://localhost:1313/post/test/</link>
-      <pubDate>Fri, 03 Feb 2023 11:07:14 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/test/</guid>
-      <description></description>
+      <description>hugo简介 Hugo，也就是静态网站生成框架，构建了一套代码生成框架和各种可选的主题。可以帮助我们自动搭建好我们的个人博客网站，不需要关注任</description>
     </item>
     
     <item>
@@ -32,15 +104,6 @@
       
       <guid>http://localhost:1313/post/my-first-post/</guid>
       <description># 这是我的第一篇博客 这是我的第一篇博客 个人网站链接</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://localhost:1313/post/hugo/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/hugo/</guid>
-      <description></description>
     </item>
     
   </channel>

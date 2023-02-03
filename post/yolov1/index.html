@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Yolov1 - Yang’s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="杨浩伟" /><meta name="description" content="Yolo-v1: Free-anchor v1： 每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.110.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/yolov1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Yolov1" />
+<meta property="og:description" content="Yolo-v1: Free-anchor v1： 每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/yolov1/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-03T19:53:38+08:00" />
+<meta property="article:modified_time" content="2023-02-03T19:53:38+08:00" />
+<meta itemprop="name" content="Yolov1">
+<meta itemprop="description" content="Yolo-v1: Free-anchor v1： 每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对"><meta itemprop="datePublished" content="2023-02-03T19:53:38+08:00" />
+<meta itemprop="dateModified" content="2023-02-03T19:53:38+08:00" />
+<meta itemprop="wordCount" content="4263">
+<meta itemprop="keywords" content="YOLO," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Yolov1"/>
+<meta name="twitter:description" content="Yolo-v1: Free-anchor v1： 每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Yang’s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Yang’s Blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Yolov1</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-02-03 </span>
+        <div class="post-category">
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"> 计算机视觉 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#641667448499_picimgyolov1png"><img src="img/Yolov1.png" alt="641667448499_.pic"></a></li>
+    <li><a href="#yolo-v1">Yolo-v1:</a>
+      <ul>
+        <li><a href="#逐网格找东西">逐网格找东西：</a></li>
+        <li><a href="#输出值解析">输出值解析：</a>
+          <ul>
+            <li><a href="#通道数30">通道数30:</a></li>
+            <li><a href="#置信度">置信度：</a></li>
+            <li><a href="#偏移值">偏移值：</a></li>
+          </ul>
+        </li>
+        <li><a href="#正负样本匹配">正负样本匹配：</a></li>
+        <li><a href="#损失函数">损失函数：</a></li>
+        <li><a href="#测试">测试：</a>
+          <ul>
+            <li><a href="#计算bbox和类别">计算bbox和类别：</a></li>
+            <li><a href="#计算每个边框的得分">计算每个边框的得分：</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#yolo--v1理解">YOLO- v1理解</a></li>
+    <li><a href="#改进后的yolo--v1">改进后的YOLO- v1</a>
+      <ul>
+        <li><a href="#损失函数-1">损失函数：</a></li>
+      </ul>
+    </li>
+    <li><a href="#搭建yolo-v1">搭建YOLO-v1</a>
+      <ul>
+        <li><a href="#制作label">制作label：</a></li>
+        <li><a href="#如何计算loss">如何计算loss</a></li>
+        <li><a href="#预测时如何计算框">预测时，如何计算框</a></li>
+        <li><a href="#预测时需要做什么处理">预测时，需要做什么处理</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="641667448499_picimgyolov1png"><img src="img/Yolov1.png" alt="641667448499_.pic"></h1>
+<h1 id="yolo-v1">Yolo-v1:</h1>
+<blockquote>
+<p>Free-anchor v1：</p>
+<p>每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对应的bbox，进行反向传播位置参数。</p>
+<p>Free-anchor v2：</p>
+<p>每个网格为中心，预测anchor的(x,y,h,w),而不是预测anchor的偏执。</p>
+<p>anchor-free会导致多个物体中心都落在同一个cell里，导致预测不好。</p>
+</blockquote>
+<h2 id="逐网格找东西">逐网格找东西：</h2>
+<p><img src="img/v2-d06b4d847bbf7b51c7a6d2d3cf0f67d2_720w.png" alt="v2-d06b4d847bbf7b51c7a6d2d3cf0f67d2_720w"></p>
+<p>将1张图片7等分，子图经过网络都会下采样成一个像素点。通过这个像素点来判断是否是<strong>物体的中心坐标</strong>，并<strong>确定其类别</strong>。</p>
+<p>YOLO- v1有三部分输出：</p>
+<ul>
+<li>objectness：框的置信度，表征该网络是否有物体。</li>
+<li>class：类别预测</li>
+<li>bbox：边界框偏移预测</li>
+</ul>
+<h2 id="输出值解析">输出值解析：</h2>
+<blockquote>
+<p>网络输出(7,7,30)的特征图。(7，7)是原图(448，448)经过64倍采样得到的。</p>
+</blockquote>
+<h3 id="通道数30">通道数30:</h3>
+<p>(7，7)的图像上每个像素点预测两个bounding box，每个bbox包含5个输出参数：</p>
+<ul>
+<li>置信度，锚框的四个位置参数。两个锚框-&gt;一共10个框。</li>
+<li>20个类别 -&gt; num_class</li>
+</ul>
+<p>最后网络输出的预测参数总量：
+$$
+S<em>S</em>(5*B + C)
+$$</p>
+<p>$$
+S = \frac{输出图片尺寸}{网络的下采样倍数}
+$$</p>
+<h3 id="置信度">置信度：</h3>
+<blockquote>
+<p>与RPN相同，都是预测是否是正负样本。但是又有不同。YOLO认为框的置信度也应该有表征对bbox预测的定量评价的能力。</p>
+</blockquote>
+<ul>
+<li>无物体处，学习标签为0.</li>
+<li>有物体处：
+<ul>
+<li>对于正样本(grid_x,grid_y)处，YOLO输出B个bbox</li>
+<li>计算这B个bbox与真实bbox的交并比，得到B个iou。</li>
+<li>选择其中iou最大的值作为置信度C的学习目标。</li>
+<li>也只让这个iou最大的bbox的位置信息去反向传播，其他B-1个框忽略。</li>
+</ul>
+</li>
+</ul>
+<h3 id="偏移值">偏移值：</h3>
+<p>给定一个真实的bbox坐标(Xmin,Ymin,Xmax,Ymax)，计算中心点及w,h:
+$$
+w = x_{max} - x_{min},
+h = y_{max} - y_{min},
+\
+c_x = \frac{x_{min} + x_{max}}{2},
+c_y = \frac{y_{min} + y_{max}}{2}
+$$
+获得中心点后，就可以得到落在网格的什么位置：
+$$
+grid_x = int(\frac{c_x}{stride}),
+grad_y = int(\frac{c_y}{stride})
+$$
+中心点误差就出来了：
+$$
+l_x = c_x - grid_x,
+l_y = c_y - grid_y
+$$
+<img src="img/v2-5b00009e92b5ebfac3bb2f5a36a615d5_b.png" alt="v2-5b00009e92b5ebfac3bb2f5a36a615d5_b"></p>
+<p>w,h必须进行归一化操作：
+$$
+w = \frac{w}{w_{image}},
+h = \frac{h}{h_{image}}
+$$</p>
+<h4 id="反解中心点">反解中心点：</h4>
+<p>$$
+c_x = (grid_x + l_x) * stride,
+c_y = (grid_y + l_y) * stride,\
+w_{box} = w * w_{image},
+h_{box} = h * h_{image}
+$$</p>
+<h2 id="正负样本匹配">正负样本匹配：</h2>
+<p>若某个物体的中心落在这个网格中，则这个网格就负责预测这个物体。</p>
+<h2 id="损失函数">损失函数：</h2>
+<p>YOLO系列：class和offset只用正样本更新，只有confidence使用正负样本进行更新。</p>
+<p><img src="img/v2-e659942854f0a4f86056a9fc34efaa6a_b.png" alt="v2-e659942854f0a4f86056a9fc34efaa6a_b"></p>
+<ul>
+<li>前两行都是均方误差计算位置信息的损失。前面的1指的是正样本才计算位置损失函数与类别损失函数。</li>
+<li>有物体的地方，我们让网络去学习，逼近他。没有物体的地方，让置信度很低就行。</li>
+<li>第三行计算预测框与真实框的iou，预测越准，iou越接近1，锚框逐渐逼近真实框。</li>
+<li>第四行，没有物体的地方，目标conference=0，置信度会逐渐逼近0，正负样本不均衡，所以负样本的权重改为0.5.</li>
+<li>第五行，分类损失也适用均方误差，不用Softmax，难以理解。</li>
+</ul>
+<p><img src="img/651667448499_.png" alt="651667448499_.pic"></p>
+<h2 id="测试">测试：</h2>
+<h3 id="计算bbox和类别">计算bbox和类别：</h3>
+<p>$$
+center_x=(grid_x+c_x)×stride\</p>
+<p>center_y=(grid_y+c_y)×stride\</p>
+<p>w_{box}=w×w_{image}\</p>
+<p>h_{box}=h×h_{image}\</p>
+<p>class = max(C_1,C_2&hellip;.C_{20})
+$$</p>
+<h3 id="计算每个边框的得分">计算每个边框的得分：</h3>
+<p>边框置信度 * 类别置信度
+$$
+score = C_{box} * Pr(class)
+$$
+训练阶段，只有正样本的class预测才会被学习到，而<strong>负样本，也就是背景给出的class预测不会被学习</strong>。这就会导致在推理的时候，有物体的地方会有可靠的class预测输出，而没有物体的地方的class预测输出约等于瞎预测，毕竟没有被训练。但这个时候，由于objectness的作用就是判断是否有物体，因此，对于前景，objectness的值会很接近1，反之很接近0。那么，即使class瞎预测，但objectness只要给出接近0的值，那么这个地方的score也会很低，从而滤除了背景。</p>
+<h1 id="yolo--v1理解">YOLO- v1理解</h1>
+<p>YOLO的精髓在于<strong>把背景和前景的各个类别的学习解耦</strong>了。</p>
+<ul>
+<li>
+<p>objectness等价于RPN。</p>
+</li>
+<li>
+<p>类别学习只学正样本的，标签里没有背景标签。这就等价于Faster—RCNN的第二阶段。</p>
+</li>
+<li>
+<p>SSD，RetinaNet 都是直接把背景作为一类标签加到class里的。</p>
+</li>
+</ul>
+<p><strong>解耦操作</strong>才是YOLO为什么对Focal loss不敏感的原因，因为它用objectness分支把背景和前景的各个类别的学习解耦了。class分支只需要学正样本就好了。</p>
+<p>像RetinaNet那样，单独的背景要和其他一大堆前景标签一块battle，把置信度拉到自己头上。**Objectness预测分支才是YOLO的灵魂！**如果没有这个分支，那和SSD、RetinaNet也就没差别了。</p>
+<h1 id="改进后的yolo--v1">改进后的YOLO- v1</h1>
+<p><img src="img/v2-02557de6c67e04ff4a9ae9038f87ee3c_b.png" alt="img"></p>
+<ul>
+<li>用resnet-18来作为网络的特征提取层</li>
+<li>SSP使用多尺度融合，对输入的特征图进行不同卷积核的处理，经过maxpooling处理后，在channel维度进行拼接，再经过1*1的卷积层调整通道，输出同尺度的特征图。</li>
+<li>Detection head：进行若干次卷积，1*1与3*3卷积重复进行。</li>
+<li>predict：使用1*1的卷积在特征图上进行预测。flatten会破坏特征图的空间信息。
+<ul>
+<li>objectness：经过sigmoid，输出13*13*1	(B = 1)</li>
+<li>Class:经过Softmax，输出13*13*C</li>
+<li>regression：
+<ul>
+<li><strong>c_x,c_y就是介于(0,1)之间的数</strong>，其本身就是有上下界的，而线性输出并没有上下界，这就容易导致在学习的初期，网络可能预测的值非常大，导致bbox分支学习不稳定。经过sigmoid映射为(0,1)。</li>
+<li>边界框的宽高显然是个非负数，而线性输出不能保证这一点，输出一个负数，是没有意义的。
+<ul>
+<li>一种解决办法是<strong>约束输出为非负</strong>，如用ReLU函数，但这种办法就会隐含一个约束条件，这并不利于优化，而且ReLU的0区间无法回传梯度；</li>
+<li>另一个办法就是<strong>使用exp-log方法</strong>，具体来说，就是将 w，h 用log函数来处理一下：$t_w=log(w)，t_h = log(h)$。这样，网络的预测值就可以是负值了。对于预测值，通过exp就可以去到真实的w,h.</li>
+</ul>
+</li>
+<li>
+<img src="img/v2-d70cc3d62a83f7a3600aad6dd67600bb_b.png" alt="img" style="zoom:50%;" />
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="损失函数-1">损失函数：</h2>
+<ul>
+<li>
+<p>objectness损失：使用L2loss</p>
+<ul>
+<li>$$
+L_{obj}= 5*\sum_0^{s^2} (C_{ij}^{object} - 1)^2 + 1 * \sum_0^{s^2} (C_{ij}^{noobject} - 1)^2
+$$</li>
+</ul>
+</li>
+<li>
+<p>class损失：Cross-entropy</p>
+<ul>
+<li>$$
+L_{cls} = \sum_0^{s^2} CE(p^h_{ij},p_{ij})
+$$</li>
+</ul>
+</li>
+<li>
+<p>位置信息损失：</p>
+<ul>
+<li>
+<img src="img/Screen Shot 2022-09-18 at 18.28.15.png" alt="Screen Shot 2022-09-18 at 18.28.15" style="zoom: 33%;" />
+- 中心点是二分类，w,h为均方误差。
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="搭建yolo-v1">搭建YOLO-v1</h1>
+<ol>
+<li><strong>数据预处理</strong></li>
+<li><strong>网络搭建</strong>：torch搭积木。</li>
+<li><strong>训练时，如何制作label？</strong> ✅✅✅</li>
+<li><strong>训练时，如何将三个预测用于计算loss？</strong> ✅✅✅</li>
+<li><strong>测试时，如何将从txtytwth预测换算出bbox的左上角坐标（x1，y1）和右下角坐标（x2，y2）？</strong> 公式反解。✅✅✅</li>
+<li><strong>测试时，如何对预测结果进行后处理，以便得到我们所需要的合适的结果？</strong>
+<ol>
+<li>对score进行处理，删去低置信度的。</li>
+<li>进行nms处理。</li>
+</ol>
+</li>
+</ol>
+<h2 id="制作label">制作label：</h2>
+<blockquote>
+<p>label的制作</p>
+<p>输入：真实框的位置信息和类别</p>
+<p>输出：[ 置信度，类别，[中心点，wh偏置]，权重 ]</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">gt_creator</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="n">stride</span><span class="p">,</span> <span class="n">label_lists</span><span class="o">=</span><span class="p">[]):</span>
+</span></span><span class="line"><span class="cl">  	<span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">  		label_lists为真实框的标签值-&gt;[class,x,y,x,y]-&gt;(Batch,num_label,5)
+</span></span></span><span class="line"><span class="cl"><span class="s2">  		stride为下采样倍数
+</span></span></span><span class="line"><span class="cl"><span class="s2">  		input_size为框的
+</span></span></span><span class="line"><span class="cl"><span class="s2">  		输出：(Batch,num_label,7)
+</span></span></span><span class="line"><span class="cl"><span class="s2">  	&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 必要的参数</span>
+</span></span><span class="line"><span class="cl">    <span class="n">batch_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_lists</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 拿到图像的宽高，用于计算权重</span>
+</span></span><span class="line"><span class="cl">    <span class="n">w</span> <span class="o">=</span> <span class="n">input_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">h</span> <span class="o">=</span> <span class="n">input_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 得到真实框的中心点</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ws</span> <span class="o">=</span> <span class="n">w</span> <span class="o">//</span> <span class="n">stride</span>
+</span></span><span class="line"><span class="cl">    <span class="n">hs</span> <span class="o">=</span> <span class="n">h</span> <span class="o">//</span> <span class="n">stride</span>
+</span></span><span class="line"><span class="cl">    <span class="n">s</span> <span class="o">=</span> <span class="n">stride</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 生成标签 					置信度，类别，锚框位置信息，回归权重</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gt_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">hs</span><span class="p">,</span> <span class="n">ws</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="mi">4</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 制作训练标签</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">batch_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">gt_label</span> <span class="ow">in</span> <span class="n">label_lists</span><span class="p">[</span><span class="n">batch_index</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">          	<span class="c1"># 拿到类别</span>
+</span></span><span class="line"><span class="cl">            <span class="n">gt_class</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">gt_label</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 根据真实框来得到标签，gt_label里包含一些锚框的右上左下，通过这些来计算中间点和宽高。</span>
+</span></span><span class="line"><span class="cl">            <span class="n">result</span> <span class="o">=</span> <span class="n">generate_txtytwth</span><span class="p">(</span><span class="n">gt_label</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 图片里有label</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">              	<span class="c1"># 拿到中心点，偏差和权重</span>
+</span></span><span class="line"><span class="cl">                <span class="n">grid_x</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">,</span> <span class="n">tx</span><span class="p">,</span> <span class="n">ty</span><span class="p">,</span> <span class="n">tw</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span> <span class="n">weight</span> <span class="o">=</span> <span class="n">result</span>
+</span></span><span class="line"><span class="cl">								<span class="c1"># 如果中心点在图片内，就加入到gt_tensor中</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">grid_x</span> <span class="o">&lt;</span> <span class="n">gt_tensor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">and</span> <span class="n">grid_y</span> <span class="o">&lt;</span> <span class="n">gt_tensor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">                  	<span class="c1"># 置信度</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">gt_tensor</span><span class="p">[</span><span class="n">batch_index</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">,</span> <span class="n">grid_x</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1"># 类别</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">gt_tensor</span><span class="p">[</span><span class="n">batch_index</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">,</span> <span class="n">grid_x</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">gt_class</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1"># 偏差</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">gt_tensor</span><span class="p">[</span><span class="n">batch_index</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">,</span> <span class="n">grid_x</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">tx</span><span class="p">,</span> <span class="n">ty</span><span class="p">,</span> <span class="n">tw</span><span class="p">,</span> <span class="n">th</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1"># 权重</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">gt_tensor</span><span class="p">[</span><span class="n">batch_index</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">,</span> <span class="n">grid_x</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="n">weight</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">gt_tensor</span> <span class="o">=</span> <span class="n">gt_tensor</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="mi">4</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">gt_tensor</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1"># 根据真实框生成label</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">generate_dxdywh</span><span class="p">(</span><span class="n">gt_label</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  	<span class="c1"># 拿到左上右下的坐标</span>
+</span></span><span class="line"><span class="cl">    <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">gt_label</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 计算中心点和真实框宽高</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">xmax</span> <span class="o">+</span> <span class="n">xmin</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">w</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c_y</span> <span class="o">=</span> <span class="p">(</span><span class="n">ymax</span> <span class="o">+</span> <span class="n">ymin</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">h</span>
+</span></span><span class="line"><span class="cl">    <span class="n">box_w</span> <span class="o">=</span> <span class="p">(</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span> <span class="o">*</span> <span class="n">w</span>
+</span></span><span class="line"><span class="cl">    <span class="n">box_h</span> <span class="o">=</span> <span class="p">(</span><span class="n">ymax</span> <span class="o">-</span> <span class="n">ymin</span><span class="p">)</span> <span class="o">*</span> <span class="n">h</span>
+</span></span><span class="line"><span class="cl">		<span class="c1"># 框的宽高必须大于1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">box_w</span> <span class="o">&lt;</span> <span class="mf">1.</span> <span class="ow">or</span> <span class="n">box_h</span> <span class="o">&lt;</span> <span class="mf">1.</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># print(&#39;A dirty data !!!&#39;)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">False</span>    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 拿到中心点的真实值（取整）</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c_x_s</span> <span class="o">=</span> <span class="n">c_x</span> <span class="o">/</span> <span class="n">s</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c_y_s</span> <span class="o">=</span> <span class="n">c_y</span> <span class="o">/</span> <span class="n">s</span>
+</span></span><span class="line"><span class="cl">    <span class="n">grid_x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">c_x_s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">grid_y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">c_y_s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 计算中心点损失</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tx</span> <span class="o">=</span> <span class="n">c_x_s</span> <span class="o">-</span> <span class="n">grid_x</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ty</span> <span class="o">=</span> <span class="n">c_y_s</span> <span class="o">-</span> <span class="n">grid_y</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 计算真实框的偏移，取log</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">box_w</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">box_h</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 权重计算，框越大，权重越大</span>
+</span></span><span class="line"><span class="cl">    <span class="n">weight</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">-</span> <span class="p">(</span><span class="n">box_w</span> <span class="o">/</span> <span class="n">w</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">box_h</span> <span class="o">/</span> <span class="n">h</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">grid_x</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">,</span> <span class="n">tx</span><span class="p">,</span> <span class="n">ty</span><span class="p">,</span> <span class="n">tw</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span> <span class="n">weight</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="如何计算loss">如何计算loss</h2>
+<blockquote>
+<p>输入：网络预测结果与真实值</p>
+<p>输出：损失值</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MSEWithLogitsLoss</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  	<span class="c1"># 置信度需要不同的loss</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">super</span><span class="p">(</span><span class="n">MSEWithLogitsLoss</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">reduction</span> <span class="o">=</span> <span class="n">reduction</span>
+</span></span><span class="line"><span class="cl">		<span class="c1"># 置信度需要分类型算。</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">logits</span><span class="p">,</span> <span class="n">targets</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">inputs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">logits</span><span class="p">),</span> <span class="nb">min</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">-</span> <span class="mf">1e-4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">pos_id</span> <span class="o">=</span> <span class="p">(</span><span class="n">targets</span><span class="o">==</span><span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">neg_id</span> <span class="o">=</span> <span class="p">(</span><span class="n">targets</span><span class="o">==</span><span class="mf">0.0</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pos_loss</span> <span class="o">=</span> <span class="n">pos_id</span> <span class="o">*</span> <span class="p">(</span><span class="n">inputs</span> <span class="o">-</span> <span class="n">targets</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl">        <span class="n">neg_loss</span> <span class="o">=</span> <span class="n">neg_id</span> <span class="o">*</span> <span class="p">(</span><span class="n">inputs</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl">        <span class="n">loss</span> <span class="o">=</span> <span class="mf">5.0</span><span class="o">*</span><span class="n">pos_loss</span> <span class="o">+</span> <span class="mf">1.0</span><span class="o">*</span><span class="n">neg_loss</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduction</span> <span class="o">==</span> <span class="s1">&#39;mean&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">batch_size</span> <span class="o">=</span> <span class="n">logits</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span> <span class="o">/</span> <span class="n">batch_size</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">loss</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">loss</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="n">pred_conf</span><span class="p">,</span> <span class="n">pred_cls</span><span class="p">,</span> <span class="n">pred_txtytwth</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 损失函数</span>
+</span></span><span class="line"><span class="cl">    <span class="n">conf_loss_function</span> <span class="o">=</span> <span class="n">MSEWithLogitsLoss</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cls_loss_function</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">txty_loss_function</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BCEWithLogitsLoss</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">twth_loss_function</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 拿到网络输出的预测值</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pred_conf</span> <span class="o">=</span> <span class="n">pred_conf</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># torch偏好的分类轴在第二维度</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pred_cls</span> <span class="o">=</span> <span class="n">pred_cls</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pred_txty</span> <span class="o">=</span> <span class="n">pred_txtytwth</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pred_twth</span> <span class="o">=</span> <span class="n">pred_txtytwth</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">:]</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 拿到标签的对应值</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gt_obj</span> <span class="o">=</span> <span class="n">label</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gt_cls</span> <span class="o">=</span> <span class="n">label</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gt_txty</span> <span class="o">=</span> <span class="n">label</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gt_twth</span> <span class="o">=</span> <span class="n">label</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 拿到权重</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gt_box_scale_weight</span> <span class="o">=</span> <span class="n">label</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">6</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">batch_size</span> <span class="o">=</span> <span class="n">pred_conf</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 置信度损失</span>
+</span></span><span class="line"><span class="cl">    <span class="n">conf_loss</span> <span class="o">=</span> <span class="n">conf_loss_function</span><span class="p">(</span><span class="n">pred_conf</span><span class="p">,</span> <span class="n">gt_obj</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 类别损失，只要正样本的损失</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cls_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">cls_loss_function</span><span class="p">(</span><span class="n">pred_cls</span><span class="p">,</span> <span class="n">gt_cls</span><span class="p">)</span> <span class="o">*</span> <span class="n">gt_obj</span><span class="p">)</span> <span class="o">/</span> <span class="n">batch_size</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 边界框的位置损失，只要正样本损失</span>
+</span></span><span class="line"><span class="cl">    <span class="n">txty_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">txty_loss_function</span><span class="p">(</span><span class="n">pred_txty</span><span class="p">,</span> <span class="n">gt_txty</span><span class="p">),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">gt_box_scale_weight</span> <span class="o">*</span> <span class="n">gt_obj</span><span class="p">)</span> <span class="o">/</span> <span class="n">batch_size</span>
+</span></span><span class="line"><span class="cl">    <span class="n">twth_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">twth_loss_function</span><span class="p">(</span><span class="n">pred_twth</span><span class="p">,</span> <span class="n">gt_twth</span><span class="p">),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">gt_box_scale_weight</span> <span class="o">*</span> <span class="n">gt_obj</span><span class="p">)</span> <span class="o">/</span> <span class="n">batch_size</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bbox_loss</span> <span class="o">=</span> <span class="n">txty_loss</span> <span class="o">+</span> <span class="n">twth_loss</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 总的损失</span>
+</span></span><span class="line"><span class="cl">    <span class="n">total_loss</span> <span class="o">=</span> <span class="n">conf_loss</span> <span class="o">+</span> <span class="n">cls_loss</span> <span class="o">+</span> <span class="n">bbox_loss</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">conf_loss</span><span class="p">,</span> <span class="n">cls_loss</span><span class="p">,</span> <span class="n">bbox_loss</span><span class="p">,</span> <span class="n">total_loss</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="预测时如何计算框">预测时，如何计算框</h2>
+<blockquote>
+<p>预测时，网络输出：置信度，物体的中心点，锚框的偏置，中心点的类别</p>
+<p>需要通过中心点和wh偏置计算出锚框的左上右下坐标。</p>
+</blockquote>
+<img src="img/Screen Shot 2022-09-19 at 10.54.27.png" alt="Screen Shot 2022-09-19 at 10.54.27" style="zoom:67%;" />
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">create_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_size</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  	<span class="c1">#计算所有的中心点，同上</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 输入图像的宽和高</span>
+</span></span><span class="line"><span class="cl">    <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">input_size</span><span class="p">,</span> <span class="n">input_size</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 特征图的宽和高</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ws</span><span class="p">,</span> <span class="n">hs</span> <span class="o">=</span> <span class="n">w</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">stride</span><span class="p">,</span> <span class="n">h</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">stride</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 使用torch.meshgrid函数来获得矩阵G的x坐标和y坐标</span>
+</span></span><span class="line"><span class="cl">    <span class="n">grid_y</span><span class="p">,</span> <span class="n">grid_x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">([</span><span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">hs</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">ws</span><span class="p">)])</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 将xy两部分坐标拼在一起，得到矩阵G</span>
+</span></span><span class="line"><span class="cl">    <span class="n">grid_xy</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">grid_x</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 最终G矩阵的维度是[1,HxW,2]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">grid_xy</span> <span class="o">=</span> <span class="n">grid_xy</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">hs</span><span class="o">*</span><span class="n">ws</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">grid_xy</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">decode_boxes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pred</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    input box :  [tx, ty, tw, th]
+</span></span></span><span class="line"><span class="cl"><span class="s2">    output box : [xmin, ymin, xmax, ymax]
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">output</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 获取bbox的中心点坐标和宽高</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pred</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">pred</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid_cell</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">stride</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pred</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">pred</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">:])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 由中心点坐标和宽高获得左上角与右下角的坐标</span>
+</span></span><span class="line"><span class="cl">    <span class="n">output</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pred</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">pred</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl">    <span class="n">output</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pred</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">pred</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl">    <span class="n">output</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pred</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">pred</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl">    <span class="n">output</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">pred</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">pred</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">output</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="预测时需要做什么处理">预测时，需要做什么处理</h2>
+<p>还需要对预测结果进行一次后处理，后处理的主要作用是：</p>
+<ul>
+<li>滤掉那些得分很低的边界框。</li>
+<li>滤掉那些针对同一目标的冗余检测，即<strong>非极大值抑制</strong>（NMS）处理。</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">杨浩伟</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2023-02-03
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/yolo/">YOLO</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/yolov2/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Yolov2</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/hugo_2/">
+            <span class="next-text nav-default">将本地博客托管到Github Pages上</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>杨浩伟</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
