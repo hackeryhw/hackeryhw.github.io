@@ -48,7 +48,7 @@
 <meta itemprop="name" content="Yolov1">
 <meta itemprop="description" content="Yolo-v1: Free-anchor v1： 每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对"><meta itemprop="datePublished" content="2023-02-03T19:53:38+08:00" />
 <meta itemprop="dateModified" content="2023-02-03T19:53:38+08:00" />
-<meta itemprop="wordCount" content="4265">
+<meta itemprop="wordCount" content="4263">
 <meta itemprop="keywords" content="YOLO," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Yolov1"/>
 <meta name="twitter:description" content="Yolo-v1: Free-anchor v1： 每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对"/>
@@ -248,7 +248,7 @@ $$
 l_x = c_x - grid_x,
 l_y = c_y - grid_y
 $$
-<img src="/Users/yangyanghaowei/Downloads/v2-5b00009e92b5ebfac3bb2f5a36a615d5_b.jpg" alt="v2-5b00009e92b5ebfac3bb2f5a36a615d5_b"></p>
+<img src="../../img/v2-5b00009e92b5ebfac3bb2f5a36a615d5_b.png" alt="v2-5b00009e92b5ebfac3bb2f5a36a615d5_b"></p>
 <p>w,h必须进行归一化操作：
 $$
 w = \frac{w}{w_{image}},
@@ -273,7 +273,7 @@ $$</p>
 <li>第四行，没有物体的地方，目标conference=0，置信度会逐渐逼近0，正负样本不均衡，所以负样本的权重改为0.5.</li>
 <li>第五行，分类损失也适用均方误差，不用Softmax，难以理解。</li>
 </ul>
-<p>![651667448499_.pic](/Users/yangyanghaowei/Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/eb57592e77447005c5fa6e7bb8be43df/Message/MessageTemp/9e20f478899dc29eb19741386f9343c8/Image/651667448499_.pic.jpg)</p>
+<p><img src="../../img/651667448499_.png" alt="651667448499_.pic"></p>
 <h2 id="测试">测试：</h2>
 <h3 id="计算bbox和类别">计算bbox和类别：</h3>
 <p>$$
@@ -305,7 +305,7 @@ $$
 <p><strong>解耦操作</strong>才是YOLO为什么对Focal loss不敏感的原因，因为它用objectness分支把背景和前景的各个类别的学习解耦了。class分支只需要学正样本就好了。</p>
 <p>像RetinaNet那样，单独的背景要和其他一大堆前景标签一块battle，把置信度拉到自己头上。**Objectness预测分支才是YOLO的灵魂！**如果没有这个分支，那和SSD、RetinaNet也就没差别了。</p>
 <h1 id="改进后的yolo--v1">改进后的YOLO- v1</h1>
-<p><img src="/Users/yangyanghaowei/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%9B%BE%E7%89%87/v2-02557de6c67e04ff4a9ae9038f87ee3c_b.png" alt="img"></p>
+<p><img src="../../img/v2-02557de6c67e04ff4a9ae9038f87ee3c_b.png" alt="img"></p>
 <ul>
 <li>用resnet-18来作为网络的特征提取层</li>
 <li>SSP使用多尺度融合，对输入的特征图进行不同卷积核的处理，经过maxpooling处理后，在channel维度进行拼接，再经过1*1的卷积层调整通道，输出同尺度的特征图。</li>
@@ -324,7 +324,7 @@ $$
 </ul>
 </li>
 <li>
-<img src="/Users/yangyanghaowei/学习笔记/图片/v2-d70cc3d62a83f7a3600aad6dd67600bb_b.png" alt="img" style="zoom:50%;" />
+<img src="../../img/v2-d70cc3d62a83f7a3600aad6dd67600bb_b.png" alt="img" style="zoom:50%;" />
 </li>
 </ul>
 </li>
@@ -353,7 +353,7 @@ $$</li>
 <p>位置信息损失：</p>
 <ul>
 <li>
-<img src="/Users/yangyanghaowei/Library/Application Support/typora-user-images/Screen Shot 2022-09-18 at 18.28.15.png" alt="Screen Shot 2022-09-18 at 18.28.15" style="zoom: 33%;" />
+<img src="../../img/Screen Shot 2022-09-18 at 18.28.15.png" alt="Screen Shot 2022-09-18 at 18.28.15" style="zoom: 33%;" />
 - 中心点是二分类，w,h为均方误差。
 </li>
 </ul>
@@ -673,7 +673,7 @@ $$</li>
 <p>预测时，网络输出：置信度，物体的中心点，锚框的偏置，中心点的类别</p>
 <p>需要通过中心点和wh偏置计算出锚框的左上右下坐标。</p>
 </blockquote>
-<img src="/Users/yangyanghaowei/Library/Application Support/typora-user-images/Screen Shot 2022-09-19 at 10.54.27.png" alt="Screen Shot 2022-09-19 at 10.54.27" style="zoom:67%;" />
+<img src="../../img/Screen Shot 2022-09-19 at 10.54.27.png" alt="Screen Shot 2022-09-19 at 10.54.27" style="zoom:67%;" />
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
