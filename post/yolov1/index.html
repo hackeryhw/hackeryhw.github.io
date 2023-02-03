@@ -48,8 +48,8 @@
 <meta itemprop="name" content="Yolov1">
 <meta itemprop="description" content="Yolo-v1: Free-anchor v1： 每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对"><meta itemprop="datePublished" content="2023-02-03T19:53:38+08:00" />
 <meta itemprop="dateModified" content="2023-02-03T19:53:38+08:00" />
-<meta itemprop="wordCount" content="4263">
-<meta itemprop="keywords" content="YOLO," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="wordCount" content="4265">
+<meta itemprop="keywords" content="标签,标签," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Yolov1"/>
 <meta name="twitter:description" content="Yolo-v1: Free-anchor v1： 每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对"/>
 
@@ -129,7 +129,8 @@
       <div class="post-meta">
         <span class="post-time"> 2023-02-03 </span>
         <div class="post-category">
-            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"> 计算机视觉 </a>
+            <a href="/categories/%E6%89%80%E5%B1%9E%E7%A7%8D%E7%B1%BB/"> 所属种类 </a>
+            <a href="/categories/%E6%89%80%E5%B1%9E%E7%A7%8D%E7%B1%BB/"> 所属种类 </a>
             </div>
         
       </div>
@@ -140,7 +141,6 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#641667448499_picimgyolov1png"><img src="img/Yolov1.png" alt="641667448499_.pic"></a></li>
     <li><a href="#yolo-v1">Yolo-v1:</a>
       <ul>
         <li><a href="#逐网格找东西">逐网格找东西：</a></li>
@@ -180,7 +180,7 @@
   </div>
 </div>
     <div class="post-content">
-      <h1 id="641667448499_picimgyolov1png"><img src="img/Yolov1.png" alt="641667448499_.pic"></h1>
+      <p><img src="/Volumes/ExtremeSSD/Github.io/hackeryhw/static/img/Yolov1.png" alt="641667448499_.pic"></p>
 <h1 id="yolo-v1">Yolo-v1:</h1>
 <blockquote>
 <p>Free-anchor v1：</p>
@@ -190,7 +190,7 @@
 <p>anchor-free会导致多个物体中心都落在同一个cell里，导致预测不好。</p>
 </blockquote>
 <h2 id="逐网格找东西">逐网格找东西：</h2>
-<p><img src="img/v2-d06b4d847bbf7b51c7a6d2d3cf0f67d2_720w.png" alt="v2-d06b4d847bbf7b51c7a6d2d3cf0f67d2_720w"></p>
+<p><img src="/Users/yangyanghaowei/Downloads/v2-d06b4d847bbf7b51c7a6d2d3cf0f67d2_720w.jpg" alt="v2-d06b4d847bbf7b51c7a6d2d3cf0f67d2_720w"></p>
 <p>将1张图片7等分，子图经过网络都会下采样成一个像素点。通过这个像素点来判断是否是<strong>物体的中心坐标</strong>，并<strong>确定其类别</strong>。</p>
 <p>YOLO- v1有三部分输出：</p>
 <ul>
@@ -249,7 +249,7 @@ $$
 l_x = c_x - grid_x,
 l_y = c_y - grid_y
 $$
-<img src="img/v2-5b00009e92b5ebfac3bb2f5a36a615d5_b.png" alt="v2-5b00009e92b5ebfac3bb2f5a36a615d5_b"></p>
+<img src="/Users/yangyanghaowei/Downloads/v2-5b00009e92b5ebfac3bb2f5a36a615d5_b.jpg" alt="v2-5b00009e92b5ebfac3bb2f5a36a615d5_b"></p>
 <p>w,h必须进行归一化操作：
 $$
 w = \frac{w}{w_{image}},
@@ -266,7 +266,7 @@ $$</p>
 <p>若某个物体的中心落在这个网格中，则这个网格就负责预测这个物体。</p>
 <h2 id="损失函数">损失函数：</h2>
 <p>YOLO系列：class和offset只用正样本更新，只有confidence使用正负样本进行更新。</p>
-<p><img src="img/v2-e659942854f0a4f86056a9fc34efaa6a_b.png" alt="v2-e659942854f0a4f86056a9fc34efaa6a_b"></p>
+<p><img src="/Users/yangyanghaowei/Downloads/v2-e659942854f0a4f86056a9fc34efaa6a_b.jpg" alt="v2-e659942854f0a4f86056a9fc34efaa6a_b"></p>
 <ul>
 <li>前两行都是均方误差计算位置信息的损失。前面的1指的是正样本才计算位置损失函数与类别损失函数。</li>
 <li>有物体的地方，我们让网络去学习，逼近他。没有物体的地方，让置信度很低就行。</li>
@@ -274,7 +274,7 @@ $$</p>
 <li>第四行，没有物体的地方，目标conference=0，置信度会逐渐逼近0，正负样本不均衡，所以负样本的权重改为0.5.</li>
 <li>第五行，分类损失也适用均方误差，不用Softmax，难以理解。</li>
 </ul>
-<p><img src="img/651667448499_.png" alt="651667448499_.pic"></p>
+<p>![651667448499_.pic](/Users/yangyanghaowei/Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/eb57592e77447005c5fa6e7bb8be43df/Message/MessageTemp/9e20f478899dc29eb19741386f9343c8/Image/651667448499_.pic.jpg)</p>
 <h2 id="测试">测试：</h2>
 <h3 id="计算bbox和类别">计算bbox和类别：</h3>
 <p>$$
@@ -306,7 +306,7 @@ $$
 <p><strong>解耦操作</strong>才是YOLO为什么对Focal loss不敏感的原因，因为它用objectness分支把背景和前景的各个类别的学习解耦了。class分支只需要学正样本就好了。</p>
 <p>像RetinaNet那样，单独的背景要和其他一大堆前景标签一块battle，把置信度拉到自己头上。**Objectness预测分支才是YOLO的灵魂！**如果没有这个分支，那和SSD、RetinaNet也就没差别了。</p>
 <h1 id="改进后的yolo--v1">改进后的YOLO- v1</h1>
-<p><img src="img/v2-02557de6c67e04ff4a9ae9038f87ee3c_b.png" alt="img"></p>
+<p><img src="/Users/yangyanghaowei/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%9B%BE%E7%89%87/v2-02557de6c67e04ff4a9ae9038f87ee3c_b.png" alt="img"></p>
 <ul>
 <li>用resnet-18来作为网络的特征提取层</li>
 <li>SSP使用多尺度融合，对输入的特征图进行不同卷积核的处理，经过maxpooling处理后，在channel维度进行拼接，再经过1*1的卷积层调整通道，输出同尺度的特征图。</li>
@@ -325,7 +325,7 @@ $$
 </ul>
 </li>
 <li>
-<img src="img/v2-d70cc3d62a83f7a3600aad6dd67600bb_b.png" alt="img" style="zoom:50%;" />
+<img src="/Users/yangyanghaowei/学习笔记/图片/v2-d70cc3d62a83f7a3600aad6dd67600bb_b.png" alt="img" style="zoom:50%;" />
 </li>
 </ul>
 </li>
@@ -354,7 +354,7 @@ $$</li>
 <p>位置信息损失：</p>
 <ul>
 <li>
-<img src="img/Screen Shot 2022-09-18 at 18.28.15.png" alt="Screen Shot 2022-09-18 at 18.28.15" style="zoom: 33%;" />
+<img src="/Users/yangyanghaowei/Library/Application Support/typora-user-images/Screen Shot 2022-09-18 at 18.28.15.png" alt="Screen Shot 2022-09-18 at 18.28.15" style="zoom: 33%;" />
 - 中心点是二分类，w,h为均方误差。
 </li>
 </ul>
@@ -674,7 +674,7 @@ $$</li>
 <p>预测时，网络输出：置信度，物体的中心点，锚框的偏置，中心点的类别</p>
 <p>需要通过中心点和wh偏置计算出锚框的左上右下坐标。</p>
 </blockquote>
-<img src="img/Screen Shot 2022-09-19 at 10.54.27.png" alt="Screen Shot 2022-09-19 at 10.54.27" style="zoom:67%;" />
+<img src="/Users/yangyanghaowei/Library/Application Support/typora-user-images/Screen Shot 2022-09-19 at 10.54.27.png" alt="Screen Shot 2022-09-19 at 10.54.27" style="zoom:67%;" />
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -771,7 +771,8 @@ $$</li>
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/yolo/">YOLO</a>
+          <a href="/tags/%E6%A0%87%E7%AD%BE/">标签</a>
+          <a href="/tags/%E6%A0%87%E7%AD%BE/">标签</a>
           </div>
       <nav class="post-nav">
         <a class="prev" href="/post/yolov2/">
