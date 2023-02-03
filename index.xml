@@ -6,7 +6,16 @@
     <description>Recent content on Yang’s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 03 Feb 2023 11:07:14 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Feb 2023 18:09:16 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用Hugo配置博客</title>
+      <link>http://localhost:1313/post/hugo_1/</link>
+      <pubDate>Fri, 03 Feb 2023 18:09:16 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/hugo_1/</guid>
+      <description>使用hugo配置博客 hugo简介 Hugo，也就是静态网站生成框架，构建了一套代码生成框架和各种可选的主题。可以帮助我们自动搭建好我们的个人博</description>
+    </item>
+    
     <item>
       <title>Test</title>
       <link>http://localhost:1313/post/test/</link>
@@ -23,6 +32,15 @@
       
       <guid>http://localhost:1313/post/my-first-post/</guid>
       <description># 这是我的第一篇博客 这是我的第一篇博客 个人网站链接</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/hugo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/hugo/</guid>
+      <description></description>
     </item>
     
   </channel>
