@@ -86,7 +86,21 @@
   </url>
   
   <url>
+    <loc>http://localhost:1313/tags/yolo/</loc>
+    <lastmod>2023-02-03T19:53:38+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/post/yolov1/</loc>
+    <lastmod>2023-02-03T19:53:38+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/categories/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/</loc>
     <lastmod>2023-02-03T19:53:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
