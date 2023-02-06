@@ -48,7 +48,7 @@
 <meta itemprop="name" content="Yolov1">
 <meta itemprop="description" content="Yolo-v1: Free-anchor v1： 每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对"><meta itemprop="datePublished" content="2023-02-03T19:53:38+08:00" />
 <meta itemprop="dateModified" content="2023-02-03T19:53:38+08:00" />
-<meta itemprop="wordCount" content="4275">
+<meta itemprop="wordCount" content="4271">
 <meta itemprop="keywords" content="YOLO," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Yolov1"/>
 <meta name="twitter:description" content="Yolo-v1: Free-anchor v1： 每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对"/>
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"> 目标检测 </a>
             </div>
-          <span class="more-meta"> 约 4275 字 </span>
+          <span class="more-meta"> 约 4271 字 </span>
           <span class="more-meta"> 预计阅读 9 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -280,10 +280,10 @@ $$</p>
 <h3 id="计算bbox和类别">计算bbox和类别：</h3>
 <p>$$
 \begin{split}
-center_x=(grid_x+c_x)×stride,{align}
-center_y=(grid_y+c_y)×stride,\
-w_{box}=w×w_{image},\
-h_{box}=h×h_{image},\
+center_x=(grid_x+c_x)×stride,\\
+center_y=(grid_y+c_y)×stride,\\
+w_{box}=w×w_{image}\\
+h_{box}=h×h_{image}\\
 class = max(C_1,C_2&hellip;.C_{20})
 \end{split}
 $$</p>
