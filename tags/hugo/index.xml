@@ -6,7 +6,16 @@
     <description>Recent content in Hugo on Yang’s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 03 Feb 2023 18:23:18 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Feb 2023 17:51:27 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo支持数学公式</title>
+      <link>http://localhost:1313/post/hugo_4/</link>
+      <pubDate>Mon, 06 Feb 2023 17:51:27 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/hugo_4/</guid>
+      <description>直接配置config.toml文件以支持公式。 LaTeX与mathjax的区别： MathJax多行公式对齐 多行公式中常用的等号对齐：begi</description>
+    </item>
+    
     <item>
       <title>将本地博客托管到Github Pages上</title>
       <link>http://localhost:1313/post/hugo_2/</link>
