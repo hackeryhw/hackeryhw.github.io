@@ -244,9 +244,9 @@ $$
 <p>网络输出${t_x,t_y,t_w,t_h}$,$c_x,c_y$为网格的左上顶点，$p_w,p_h$为边界框的先验长宽。所以anchor只有长宽两种信息，没有中心点。</p>
 <p><img src="../../img/v2-ae32a7eab6013d726b5adc306723daee_1440w.png" alt="img">
 $$
-b_x = \sigma(t_x) + c_x\
-b_y = \sigma(t_y) + c_y\
-b_w = p_we^{t_w}\
+b_x = \sigma(t_x) + c_x\\displaylines
+b_y = \sigma(t_y) + c_y\\displaylines
+b_w = p_we^{t_w}\\displaylines
 b_h = p_he^{t_h}
 $$</p>
 <h3 id="更高分辨率的特征-passthrough">更高分辨率的特征-passThrough</h3>
@@ -276,13 +276,13 @@ $$</p>
 </ul>
 <h2 id="损失函数">损失函数：</h2>
 <h3 id="置信度损失">置信度损失：</h3>
-<p>![Screen Shot 2022-11-03 at 15.05.17](../../img/Screen Shot 2022-11-03 at 15.05.17.png)</p>
+<p>![Screen Shot 2022-11-03 at 15.05.17](../../img/Screen Shot 2022-11-03 at 15.05.17)</p>
 <p>直接对置信度进行二分类</p>
 <h3 id="类别损失">类别损失：</h3>
-<p>![Screen Shot 2022-11-03 at 15.04.38](../../img/Screen Shot 2022-11-03 at 15.04.38.png)</p>
+<p>![Screen Shot 2022-11-03 at 15.04.38](../../img/Screen Shot 2022-11-03 at 15.04.38)</p>
 <p>对类别经过sigmoid二分类，每类的概率之间独立。</p>
 <h3 id="定位损失">定位损失：</h3>
-<p>![Screen Shot 2022-11-03 at 15.07.56](../../img/Screen Shot 2022-11-03 at 15.07.56.png)</p>
+<p>![Screen Shot 2022-11-03 at 15.07.56](../../img/Screen Shot 2022-11-03 at 15.07.56)</p>
 <h1 id="实现yolo-v2">实现YOLO-v2</h1>
 <h2 id="网络搭建">网络搭建：</h2>
 <p><img src="../../img/661667449046_.png" alt="661667449046_.pic"></p>
@@ -743,9 +743,9 @@ $$</p>
 </ul>
 <p><strong>计算label</strong>：
 $$
-t_x = \frac{c_x}{stride} - grid_x \
-t_y = \frac{c_y}{stride} - grid_y \
-t_w = log(\frac{w_x}{p_w}) \
+t_x = \frac{c_x}{stride} - grid_x \\displaylines
+t_y = \frac{c_y}{stride} - grid_y \\displaylines
+t_w = log(\frac{w_x}{p_w}) \\displaylines
 t_h = log(\frac{h_s}{p_h})
 $$</p>
 <div class="highlight"><div class="chroma">
