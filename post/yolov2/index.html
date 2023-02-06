@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="杨浩伟" /><meta name="description" content="" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="杨浩伟" /><meta name="description" content="YOLO与其他模型的对比： 最大的不同：YOLO把网络分成很多的网格，而其他网络虽然也可以看做是分了很多的网格。 在YOLO中，如果物体的中心点" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,18 +40,18 @@
 
 
 <meta property="og:title" content="Yolov2" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="YOLO与其他模型的对比： 最大的不同：YOLO把网络分成很多的网格，而其他网络虽然也可以看做是分了很多的网格。 在YOLO中，如果物体的中心点" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/yolov2/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2023-02-03T19:53:42+08:00" />
 <meta property="article:modified_time" content="2023-02-03T19:53:42+08:00" />
 <meta itemprop="name" content="Yolov2">
-<meta itemprop="description" content=""><meta itemprop="datePublished" content="2023-02-03T19:53:42+08:00" />
+<meta itemprop="description" content="YOLO与其他模型的对比： 最大的不同：YOLO把网络分成很多的网格，而其他网络虽然也可以看做是分了很多的网格。 在YOLO中，如果物体的中心点"><meta itemprop="datePublished" content="2023-02-03T19:53:42+08:00" />
 <meta itemprop="dateModified" content="2023-02-03T19:53:42+08:00" />
-<meta itemprop="wordCount" content="0">
-<meta itemprop="keywords" content="标签,标签," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="wordCount" content="6380">
+<meta itemprop="keywords" content="YOLO," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Yolov2"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="YOLO与其他模型的对比： 最大的不同：YOLO把网络分成很多的网格，而其他网络虽然也可以看做是分了很多的网格。 在YOLO中，如果物体的中心点"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -129,11 +129,10 @@
       <div class="post-meta">
         <span class="post-time"> 2023-02-03 </span>
         <div class="post-category">
-            <a href="/categories/%E6%89%80%E5%B1%9E%E7%A7%8D%E7%B1%BB/"> 所属种类 </a>
-            <a href="/categories/%E6%89%80%E5%B1%9E%E7%A7%8D%E7%B1%BB/"> 所属种类 </a>
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"> 计算机视觉 </a>
             </div>
-          <span class="more-meta"> 约 0 字 </span>
-          <span class="more-meta"> 预计阅读 0 分钟 </span>
+          <span class="more-meta"> 约 6380 字 </span>
+          <span class="more-meta"> 预计阅读 13 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -141,11 +140,841 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#yolo与其他模型的对比">YOLO与其他模型的对比：</a></li>
+      </ul>
+    </li>
+    <li><a href="#yolo-v2">YOLO-v2</a>
+      <ul>
+        <li><a href="#各种尝试">各种尝试：</a>
+          <ul>
+            <li><a href="#加入bn层">加入BN层</a></li>
+            <li><a href="#高分辨率主干网络">高分辨率主干网络</a></li>
+            <li><a href="#anchor-box机制">anchor box机制</a></li>
+            <li><a href="#全卷积神经网络">全卷积神经网络</a></li>
+            <li><a href="#新的主干网络">新的主干网络</a></li>
+            <li><a href="#kmeans聚类先验框">kmeans聚类先验框</a></li>
+            <li><a href="#direct-location-prediction">Direct location prediction</a></li>
+            <li><a href="#更高分辨率的特征-passthrough">更高分辨率的特征-passThrough</a></li>
+            <li><a href="#多尺度训练">多尺度训练</a></li>
+          </ul>
+        </li>
+        <li><a href="#正负样本匹配策略">正负样本匹配策略：</a></li>
+        <li><a href="#损失函数">损失函数：</a>
+          <ul>
+            <li><a href="#置信度损失">置信度损失：</a></li>
+            <li><a href="#类别损失">类别损失：</a></li>
+            <li><a href="#定位损失">定位损失：</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#实现yolo-v2">实现YOLO-v2</a>
+      <ul>
+        <li><a href="#网络搭建">网络搭建：</a></li>
+        <li><a href="#k-means聚类anchor">K-means聚类anchor：</a></li>
+        <li><a href="#基于iou的正样本选择">基于IOU的正样本选择</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
-      
+      <h2 id="yolo与其他模型的对比">YOLO与其他模型的对比：</h2>
+<p>最大的不同：YOLO把网络分成很多的网格，而其他网络虽然也可以看做是分了很多的网格。</p>
+<ul>
+<li>在YOLO中，如果物体的中心点落入某网格中，则这个网格会负责这个物体的预测。这就显的锚框的坐标不是很重要。</li>
+<li>而在其他网络中，如SSD，网络的中心点显得格外重要。</li>
+</ul>
+<h1 id="yolo-v2">YOLO-v2</h1>
+<p><img src="../../img/v2-93811e6a2a7a84874ee17a797e08c5b8_b.png" alt="img"></p>
+<h2 id="各种尝试">各种尝试：</h2>
+<h3 id="加入bn层">加入BN层</h3>
+<p>卷积三件套：<strong>线性卷积，BN层，激活函数</strong>(LeakyReLU)</p>
+<p>于是，YOLOv1得到了第一次性能提升，在VOC2007测试集上，从原本的63.4% mAP提升到65.8% mAP。</p>
+<p>加入BN以后可以删掉Dropout，因为模型过拟合不会过拟合。</p>
+<h3 id="高分辨率主干网络">高分辨率主干网络</h3>
+<p>YOLO- v1的backbone是在ImageNet上进行预处理，预处理时输入的图片是224x224的。而预测时输入的图片是448x448的高分辨率图像，网络突然在这上面进行处理难免会眼晕。</p>
+<p><strong>在224x224的低分辨率图像上训练好分类网络，又在448x448上进行10次微调。最后去掉全局平均层和Softmax层。</strong></p>
+<p>于是，YOLOv1网络获得了第二次性能提升：从65.8% mAP提升到69.5% mAP。这个只有YOLO的算法在使用，可能因为问题不是很严重。</p>
+<h3 id="anchor-box机制">anchor box机制</h3>
+<blockquote>
+<p>锚框：先验框。</p>
+<p>本质：提供边界框的尺寸<strong>先验</strong>，网络使用偏移量在这些先验框上进行<strong>后验</strong>调整。</p>
+<p>作用：更容易收敛。可能会导致模型精度微小的减少，但是会增加模型的召回率。</p>
+</blockquote>
+<p>相较于YOLOv1的直接回归边界框的宽高，基于先验框的方法表现得往往更好。</p>
+<h3 id="全卷积神经网络">全卷积神经网络</h3>
+<ul>
+<li>
+<p>网络改为全卷积网络。</p>
+</li>
+<li>
+<p>SxS的图片上，每个pixel上K个先验框，YOLO输出SxSxKx(1+4+c)。</p>
+</li>
+</ul>
+<p>尽管网络结构变成了全卷积网络，并使用了anchor box机制，但网络的精度并没有提升，反倒是略有所下降，69.5% mAP降为69.2% mAP，但召回率却从81%提升到88%。<strong>召回率的提升意味着YOLO可以找出更多的目标了</strong>，尽管精度下降了一点点。</p>
+<h3 id="新的主干网络">新的主干网络</h3>
+<p>新网络使用DarkNet19，19个卷积层，并且每个卷积都是三件套。</p>
+<p>于是，YOLOv1网络从上一次的69.2% mAP提升到69.6% mAP。</p>
+<h3 id="kmeans聚类先验框">kmeans聚类先验框</h3>
+<p>Faster系列的先验框都是人工设计的，包括先验框的数量和大小。</p>
+<p>然而人工设计的不一定好。为了去人工化，作者采用kmeans在数据集上对先验框进行聚类。并使用iou作为聚类的衡量指标。
+$$
+d(box,centroid) = 1-Iou(box,centroid)
+$$
+通过kmeans聚类的方法所获得的先验框显然会更适合于所使用的数据集.</p>
+<p>但是带来一些问题：</p>
+<ul>
+<li>从A数据集聚类出的先验框显然难以适应新的B数据集。尤其A和B两个数据集中所包含的数据相差甚远时，这一问题会更加的严重。</li>
+<li>如果样本不够充分，这种聚类出来的先验框也就不够好，这也是YOLOv2以及后续的YOLO版本的潜在问题之一。</li>
+<li>倘若数据集规模过小、样本不够丰富，那么由聚类得到的先验框也未必会提供足够好的尺寸先验信息。</li>
+</ul>
+<p>使用kmeans聚类方法获得先验框，再配合“Direct location prediction”的边界框预测方法，YOLOv1的性能得到了显著的提升：从69.6% mAP提升到74.4% mAP。</p>
+<p>性能提升的主要来源在于kmeans聚类，<strong>更好的先验信息自然会有效提升网络的检测性能</strong>。</p>
+<h3 id="direct-location-prediction">Direct location prediction</h3>
+<p>原始YOLO模型在早期的迭代训练中，模型不稳定。大多数的不稳定来源于对检测框位置坐标（x，y）的预测。对于这种预测偏差值的情况，模型需要长时间的随机初始化才能进行稳定地训练。</p>
+<p>因此在yoloV2中，直接预测相对于单元格的相对位置坐标</p>
+<h4 id="改进">改进：</h4>
+<p>将预测的边界框中心限制在当前cell中—加快网络收敛。</p>
+<p>网络输出${t_x,t_y,t_w,t_h}$,$c_x,c_y$为网格的左上顶点，$p_w,p_h$为边界框的先验长宽。所以anchor只有长宽两种信息，没有中心点。</p>
+<p><img src="../../img/v2-ae32a7eab6013d726b5adc306723daee_1440w.png" alt="img">
+$$
+b_x = \sigma(t_x) + c_x\
+b_y = \sigma(t_y) + c_y\
+b_w = p_we^{t_w}\
+b_h = p_he^{t_h}
+$$</p>
+<h3 id="更高分辨率的特征-passthrough">更高分辨率的特征-passThrough</h3>
+<p>借鉴SSD的思想，为了引入更多的细节信息，作者将backbone的第17层卷积输出的26×26×512特征图拿出来，做一次特殊的<strong>降采样</strong>操作，得到一个13×13×2048特征图，然后将二者在通道的维度上进行拼接，最后在这张融合了更多信息的特征图上去做检测。</p>
+<p><img src="../../img/v2-b72a84eda7409c5053ebb38440a9aeac_b.png" alt="img"></p>
+<p>特征图在经过reorg操作的处理后，特征图的宽高会减半，而通道则扩充至4倍，因此，从backbone拿出来的26×26×512特征图就变成了13×13×2048特征图。这种特殊降采样操作的好处就在于降低分辨率的同时，没丢掉任何细节信息，信息总量保持不变。</p>
+<p>加上该操作后，在VOC 2007测试集上的mAP从74.4%再次涨到了75.4%。由此可见，引入更多的细节信息，确实有助于提升模型的检测性能。</p>
+<h3 id="多尺度训练">多尺度训练</h3>
+<p>使用图像金字塔，把输入图像缩放到不同尺寸。</p>
+<p>分辨率越高，构成目标所需要的像素量就越多，目标本身的大小（或像素面积）也就越大。通过使用图像金字塔的操作，网络能够在不同尺寸下去感知同一目标，从而增强了其本身对目标尺寸变化的鲁棒性。</p>
+<p>在训练网络时，每训练迭代10次（常用iteration表示训练一次，即一次前向传播和一次反向传播，而训练一轮次则用epoch，即数据集的所有数据都经过了一次迭代），就从{320，352，384，416，448，480，512，576，608}选择一个新的图像尺寸用作后续10次训练的图像尺寸。注意，这些尺寸都是32的整数倍，因为网络的最大降采样倍数就是32，倘若输入一个无法被32整除的图像尺寸，则会遇到些不必要的麻烦。</p>
+<p>通常，多尺度训练是常用的提升模型性能的技巧之一。不过，技巧终归是技巧，并不总是有效的，若是我们的目标几乎不会有明显的尺寸变化，那么也就没必要进行多尺度训练了。</p>
+<p>配合多尺寸训练，YOLOv1再一次获得了提升：从75.4% mAP提升到76.8% mAP。</p>
+<h2 id="正负样本匹配策略">正负样本匹配策略：</h2>
+<p>论文中：</p>
+<ul>
+<li>每个GT只分配一个anchor。（物体中心落入这个cell里，这个cell就负责预测这个物体。）</li>
+<li>对于每个GT，选择与之重合最大的先验框为正样本。</li>
+<li>不是重合最大的框，但是超过额定阈值的锚框丢弃。</li>
+<li>小于阈值的标记为负样本。</li>
+</ul>
+<p>实现中：</p>
+<ul>
+<li>物体中心落入这个cell里，这个cell就负责预测这个物体。</li>
+<li>计算GT与anchor的IOU(左上点重合)。</li>
+<li>即使多个anchor都大于阈值也无妨。</li>
+</ul>
+<h2 id="损失函数">损失函数：</h2>
+<h3 id="置信度损失">置信度损失：</h3>
+<p>![Screen Shot 2022-11-03 at 15.05.17](../../img/Screen Shot 2022-11-03 at 15.05.17.png)</p>
+<p>直接对置信度进行二分类</p>
+<h3 id="类别损失">类别损失：</h3>
+<p>![Screen Shot 2022-11-03 at 15.04.38](../../img/Screen Shot 2022-11-03 at 15.04.38.png)</p>
+<p>对类别经过sigmoid二分类，每类的概率之间独立。</p>
+<h3 id="定位损失">定位损失：</h3>
+<p>![Screen Shot 2022-11-03 at 15.07.56](../../img/Screen Shot 2022-11-03 at 15.07.56.png)</p>
+<h1 id="实现yolo-v2">实现YOLO-v2</h1>
+<h2 id="网络搭建">网络搭建：</h2>
+<p><img src="../../img/661667449046_.png" alt="661667449046_.pic"></p>
+<h2 id="k-means聚类anchor">K-means聚类anchor：</h2>
+<p>k-means++是k-means的增强版，其基本思想是：<strong>初始的聚类中心之间的相互距离要尽可能的远</strong>。</p>
+<ul>
+<li>锚框中随机选择一个锚框作为中心点。</li>
+<li>计算所有锚框与这个锚框的距离。</li>
+<li>选择一个新数据点作为新的聚类中心。原则：<strong>D(X)较大的点，被选取作为聚类中心的概率较大</strong>。</li>
+<li>重复上述步骤知道K个聚类中心被选择出来。</li>
+</ul>
+<p>第2、3步选择新点的方法如下：</p>
+<ul>
+<li>对于每个点，我们都计算其和最近的一个“种子点”的距离D(x)并保存在一个数组里，然后把这些距离加起来得到Sum(D(x))。</li>
+<li>然后，再取一个随机值，用权重的方式来取计算下一个“种子点”。这个算法的实现是，先用Sum(D(x))乘以随机值Random得到值r，然后用currSum += D(x)，直到其currSum&gt;r，此时的点就是下一个“种子点”。</li>
+</ul>
+<p><img src="../../img/SouthEast.png" alt="这里写图片描述"></p>
+<blockquote>
+<p>假设A、B、C、D的D(x)如上图所示，当算法取值Sum(D(x))*random时，该值会以较大的概率落入D(x)较大的区间内，所以对应的点会以较大的概率被选中作为新的聚类中心。</p>
+</blockquote>
+<p>标记文件的宽高计算出的真实框的宽高都是相对于整张图片的。YOLOv2的anchor box坐标是相对于珊格边长的比例，因此要把先验框的长宽也转换为相应的网络比例。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">w</span> <span class="o">=</span> <span class="n">anchor_width</span> <span class="o">*</span> <span class="n">input_width</span> <span class="o">/</span> <span class="n">downsamples</span>
+</span></span><span class="line"><span class="cl"><span class="n">h</span> <span class="o">=</span> <span class="n">anchor_height</span> <span class="o">*</span> <span class="n">input_height</span> <span class="o">/</span> <span class="n">downsample</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>实现细节：锚框的<strong>超参数只对先验框的宽高有影响</strong>，对锚框的中心点无影响。所以只使用锚框的宽高坐标，中心点一致置为0.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 定义Box类，描述bounding box的坐标</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Box</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="n">h</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 计算两个box在某个轴上的重叠部分</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># x1是box1的中心在该轴上的坐标</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># len1是box1在该轴上的长度</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># x2是box2的中心在该轴上的坐标</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># len2是box2在该轴上的长度</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 返回值是该轴上重叠的长度</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">overlap</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">len1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">len2</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">len1_half</span> <span class="o">=</span> <span class="n">len1</span> <span class="o">/</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl">    <span class="n">len2_half</span> <span class="o">=</span> <span class="n">len2</span> <span class="o">/</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">left</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">x1</span> <span class="o">-</span> <span class="n">len1_half</span><span class="p">,</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">len2_half</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">right</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="n">len1_half</span><span class="p">,</span> <span class="n">x2</span> <span class="o">+</span> <span class="n">len2_half</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">right</span> <span class="o">-</span> <span class="n">left</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1"># 计算box a 和box b 的交集面积</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># a和b都是Box类型实例</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 返回值area是box a 和box b 的交集面积</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">box_intersection</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">w</span> <span class="o">=</span> <span class="n">overlap</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">w</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">h</span> <span class="o">=</span> <span class="n">overlap</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">h</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">h</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">h</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">area</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">h</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">area</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 计算 box a 和 box b 的并集面积</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># a和b都是Box类型实例</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 返回值u是box a 和box b 的并集面积</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">box_union</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">i</span> <span class="o">=</span> <span class="n">box_intersection</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">u</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">w</span> <span class="o">*</span> <span class="n">a</span><span class="o">.</span><span class="n">h</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">w</span> <span class="o">*</span> <span class="n">b</span><span class="o">.</span><span class="n">h</span> <span class="o">-</span> <span class="n">i</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">u</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 计算 box a 和 box b 的 iou</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># a和b都是Box类型实例</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 返回值是box a 和box b 的iou</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 基于一点式求iou，值得学习</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">box_iou</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">box_intersection</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="n">box_union</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用k-means ++ 初始化 centroids，减少随机初始化的centroids对最终结果的影响</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># boxes是所有bounding boxes的Box对象列表</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># n_anchors是k-means的k值</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 返回值centroids 是初始化的n_anchors个centroid</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">init_centroids</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span><span class="n">n_anchors</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">centroids</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">boxes_num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">boxes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="c1"># 随机选择一个点作为初始点</span>
+</span></span><span class="line"><span class="cl">    <span class="n">centroid_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">boxes_num</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">centroids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">boxes</span><span class="p">[</span><span class="n">centroid_index</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">centroids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">w</span><span class="p">,</span><span class="n">centroids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">h</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">centroid_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n_anchors</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">				<span class="c1"># 去选择其他n-1个点</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sum_distance</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        <span class="n">distance_thresh</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        <span class="n">distance_list</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cur_sum</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">				<span class="c1"># 循环每一个框</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">box</span> <span class="ow">in</span> <span class="n">boxes</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">min_distance</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 循环所有的中心点</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">centroid_i</span><span class="p">,</span> <span class="n">centroid</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">centroids</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">              	<span class="c1"># 计算这个框到每一个中心点框的iou</span>
+</span></span><span class="line"><span class="cl">                <span class="n">distance</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">box_iou</span><span class="p">(</span><span class="n">box</span><span class="p">,</span> <span class="n">centroid</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="c1"># 找出最小的距离</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">min_distance</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">min_distance</span> <span class="o">=</span> <span class="n">distance</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 加到sum里</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sum_distance</span> <span class="o">+=</span> <span class="n">min_distance</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 记录最小的距离</span>
+</span></span><span class="line"><span class="cl">            <span class="n">distance_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">min_distance</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">				<span class="c1"># 算法必要</span>
+</span></span><span class="line"><span class="cl">        <span class="n">distance_thresh</span> <span class="o">=</span> <span class="n">sum_distance</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">				<span class="c1"># 选择新的中心点，‘用currSum += D(x)，直到其currSum&gt;r，此时的点就是下一个“种子点”。’</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">boxes_num</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur_sum</span> <span class="o">+=</span> <span class="n">distance_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">cur_sum</span> <span class="o">&gt;</span> <span class="n">distance_thresh</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">centroids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">w</span><span class="p">,</span> <span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">h</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">centroids</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 进行 k-means 计算新的centroids</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># boxes是所有bounding boxes的Box对象列表</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># n_anchors是k-means的k值</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># centroids是所有簇的中心，可以使用上述函数初始化，可以随机选择点。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 返回值new_centroids 是计算出的新簇中心</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 返回值groups是n_anchors个簇包含的boxes的列表</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 返回值loss是所有box距离所属的最近的centroid的距离的和</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">do_kmeans</span><span class="p">(</span><span class="n">n_anchors</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">centroids</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">loss</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">groups</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">new_centroids</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_anchors</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new_centroids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Box</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">		<span class="c1"># 循环所有锚框</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">box</span> <span class="ow">in</span> <span class="n">boxes</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">min_distance</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="n">group_index</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 循环每个中心点</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">centroid_index</span><span class="p">,</span> <span class="n">centroid</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">centroids</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">          	<span class="c1"># 计算中心点与锚框的距离</span>
+</span></span><span class="line"><span class="cl">            <span class="n">distance</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">box_iou</span><span class="p">(</span><span class="n">box</span><span class="p">,</span> <span class="n">centroid</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 小于中心点就更新</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">min_distance</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">min_distance</span> <span class="o">=</span> <span class="n">distance</span>
+</span></span><span class="line"><span class="cl">                <span class="n">group_index</span> <span class="o">=</span> <span class="n">centroid_index</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 把这个先验框加到应有的组下面</span>
+</span></span><span class="line"><span class="cl">        <span class="n">groups</span><span class="p">[</span><span class="n">group_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">loss</span> <span class="o">+=</span> <span class="n">min_distance</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 对中心点的宽高进行累加</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new_centroids</span><span class="p">[</span><span class="n">group_index</span><span class="p">]</span><span class="o">.</span><span class="n">w</span> <span class="o">+=</span> <span class="n">box</span><span class="o">.</span><span class="n">w</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new_centroids</span><span class="p">[</span><span class="n">group_index</span><span class="p">]</span><span class="o">.</span><span class="n">h</span> <span class="o">+=</span> <span class="n">box</span><span class="o">.</span><span class="n">h</span>
+</span></span><span class="line"><span class="cl">		<span class="c1"># 中心点的宽高是累加的平均</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_anchors</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new_centroids</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">w</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new_centroids</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">h</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">new_centroids</span><span class="p">,</span> <span class="n">groups</span><span class="p">,</span> <span class="n">loss</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1"># 计算给定bounding boxes的n_anchors数量的centroids</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># label_path是训练集列表文件地址</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># n_anchors 是anchors的数量</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># loss_convergence是允许的loss的最小变化值</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># grid_size * grid_size 是栅格数量</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># iterations_num是最大迭代次数</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># plus = 1时启用k means ++ 初始化centroids</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">compute_centroids</span><span class="p">(</span><span class="n">label_path</span><span class="p">,</span><span class="n">n_anchors</span><span class="p">,</span><span class="n">loss_convergence</span><span class="p">,</span><span class="n">grid_size</span><span class="p">,</span><span class="n">iterations_num</span><span class="p">,</span><span class="n">plus</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">		<span class="c1"># 处理文件</span>
+</span></span><span class="line"><span class="cl">    <span class="n">boxes</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">label_files</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">label_path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">label_path</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;images&#39;</span><span class="p">,</span> <span class="s1">&#39;labels&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">label_path</span> <span class="o">=</span> <span class="n">label_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;JPEGImages&#39;</span><span class="p">,</span> <span class="s1">&#39;labels&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">label_path</span> <span class="o">=</span> <span class="n">label_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;.txt&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">label_path</span> <span class="o">=</span> <span class="n">label_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.JPEG&#39;</span><span class="p">,</span> <span class="s1">&#39;.txt&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">label_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label_path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">label_file</span> <span class="ow">in</span> <span class="n">label_files</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">label_file</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">temp</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">boxes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Box</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">4</span><span class="p">])))</span>
+</span></span><span class="line"><span class="cl">		<span class="c1"># 是否使用plus策略</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">plus</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">centroids</span> <span class="o">=</span> <span class="n">init_centroids</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="n">n_anchors</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">centroid_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">boxes</span><span class="p">),</span> <span class="n">n_anchors</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">centroids</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">centroid_index</span> <span class="ow">in</span> <span class="n">centroid_indices</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">centroids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">boxes</span><span class="p">[</span><span class="n">centroid_index</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># iterate k-means	进行k-means算法</span>
+</span></span><span class="line"><span class="cl">    <span class="n">centroids</span><span class="p">,</span> <span class="n">groups</span><span class="p">,</span> <span class="n">old_loss</span> <span class="o">=</span> <span class="n">do_kmeans</span><span class="p">(</span><span class="n">n_anchors</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">centroids</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">iterations</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="kc">True</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">      	<span class="c1">#聚类</span>
+</span></span><span class="line"><span class="cl">        <span class="n">centroids</span><span class="p">,</span> <span class="n">groups</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">do_kmeans</span><span class="p">(</span><span class="n">n_anchors</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">centroids</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">iterations</span> <span class="o">=</span> <span class="n">iterations</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;loss = </span><span class="si">%f</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">loss</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 计算两次损失</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">old_loss</span> <span class="o">-</span> <span class="n">loss</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">loss_convergence</span> <span class="ow">or</span> <span class="n">iterations</span> <span class="o">&gt;</span> <span class="n">iterations_num</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span>
+</span></span><span class="line"><span class="cl">        <span class="n">old_loss</span> <span class="o">=</span> <span class="n">loss</span>
+</span></span><span class="line"><span class="cl">				<span class="c1"># 展示结果</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">centroid</span> <span class="ow">in</span> <span class="n">centroids</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="n">centroid</span><span class="o">.</span><span class="n">w</span> <span class="o">*</span> <span class="n">grid_size</span><span class="p">,</span> <span class="n">centroid</span><span class="o">.</span><span class="n">h</span> <span class="o">*</span> <span class="n">grid_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># print result</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">centroid</span> <span class="ow">in</span> <span class="n">centroids</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;k-means result：</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">centroid</span><span class="o">.</span><span class="n">w</span> <span class="o">*</span> <span class="n">grid_size</span><span class="p">,</span> <span class="n">centroid</span><span class="o">.</span><span class="n">h</span> <span class="o">*</span> <span class="n">grid_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">label_path</span> <span class="o">=</span> <span class="s2">&#34;/raid/pengchong_data/Data/Lists/paul_train.txt&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">n_anchors</span> <span class="o">=</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl"><span class="n">loss_convergence</span> <span class="o">=</span> <span class="mf">1e-6</span>
+</span></span><span class="line"><span class="cl"><span class="n">grid_size</span> <span class="o">=</span> <span class="mi">13</span>
+</span></span><span class="line"><span class="cl"><span class="n">iterations_num</span> <span class="o">=</span> <span class="mi">100</span>
+</span></span><span class="line"><span class="cl"><span class="n">plus</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">compute_centroids</span><span class="p">(</span><span class="n">label_path</span><span class="p">,</span><span class="n">n_anchors</span><span class="p">,</span><span class="n">loss_convergence</span><span class="p">,</span><span class="n">grid_size</span><span class="p">,</span><span class="n">iterations_num</span><span class="p">,</span><span class="n">plus</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="基于iou的正样本选择">基于IOU的正样本选择</h2>
+<blockquote>
+<p><strong>如何给先验框标注标签</strong>？</p>
+<p>继承于YOLO-v1，每个像素点B个锚框，如果这个像素点是中心点，只有这B个锚框在争，所以只需要在B个先验框里选。</p>
+<p>而SSD无中心点这个概念，所以SSD只依靠先验框与真实框之间的iou进行选择。</p>
+</blockquote>
+<p>YOLO-V2现在每个像素点B个锚框，所以需要从中选择适合做正样本的先验框。</p>
+<p><strong>如何选择</strong>：</p>
+<ul>
+<li>计算这B个先验框与此处的真实框之间的iou，并设定一个阈值</li>
+<li>所有的IOU都小于阈值：为了不丢失真实框，从中选择最大iou的先验框。</li>
+<li>有多个IOU大于或者等于阈值。取其中最大的iou所对应的锚框。</li>
+<li>未被选上的锚框不参与后续的任何损失计算。</li>
+</ul>
+<p><strong>计算label</strong>：
+$$
+t_x = \frac{c_x}{stride} - grid_x \
+t_y = \frac{c_y}{stride} - grid_y \
+t_w = log(\frac{w_x}{p_w}) \
+t_h = log(\frac{h_s}{p_h})
+$$</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">generate_txtytwth</span><span class="p">(</span><span class="n">gt_label</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">anchor_size</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  			<span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">  			anchor_size:每个中心点的框就这么些，所以直接把框长宽给出来就行，每个先验框中心点都变到0，0，再与anchor_size做iou
+</span></span></span><span class="line"><span class="cl"><span class="s2">  			&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">  			<span class="c1"># 传入锚框真实值，图片长宽和下采样倍数，锚框大小</span>
+</span></span><span class="line"><span class="cl">        <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">gt_label</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 计算真实边界框的中心点和宽高</span>
+</span></span><span class="line"><span class="cl">        <span class="n">c_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">xmax</span> <span class="o">+</span> <span class="n">xmin</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">w</span>
+</span></span><span class="line"><span class="cl">        <span class="n">c_y</span> <span class="o">=</span> <span class="p">(</span><span class="n">ymax</span> <span class="o">+</span> <span class="n">ymin</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">h</span>
+</span></span><span class="line"><span class="cl">        <span class="n">box_w</span> <span class="o">=</span> <span class="p">(</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span> <span class="o">*</span> <span class="n">w</span>
+</span></span><span class="line"><span class="cl">        <span class="n">box_h</span> <span class="o">=</span> <span class="p">(</span><span class="n">ymax</span> <span class="o">-</span> <span class="n">ymin</span><span class="p">)</span> <span class="o">*</span> <span class="n">h</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">box_w</span> <span class="o">&lt;</span> <span class="mf">1e-4</span> <span class="ow">or</span> <span class="n">box_h</span> <span class="o">&lt;</span> <span class="mf">1e-4</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># print(&#39;not a valid data !!!&#39;)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">False</span>    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 将真实边界框的尺寸映射到网格的尺度上去</span>
+</span></span><span class="line"><span class="cl">        <span class="n">c_x_s</span> <span class="o">=</span> <span class="n">c_x</span> <span class="o">/</span> <span class="n">s</span>
+</span></span><span class="line"><span class="cl">        <span class="n">c_y_s</span> <span class="o">=</span> <span class="n">c_y</span> <span class="o">/</span> <span class="n">s</span>
+</span></span><span class="line"><span class="cl">        <span class="n">box_ws</span> <span class="o">=</span> <span class="n">box_w</span> <span class="o">/</span> <span class="n">s</span>
+</span></span><span class="line"><span class="cl">        <span class="n">box_hs</span> <span class="o">=</span> <span class="n">box_h</span> <span class="o">/</span> <span class="n">s</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1"># 计算中心点所落在的网格的坐标</span>
+</span></span><span class="line"><span class="cl">        <span class="n">grid_x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">c_x_s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">grid_y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">c_y_s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 获得先验框的中心点坐标和宽高</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 这里，我们设置所有的先验框的中心点坐标为0</span>
+</span></span><span class="line"><span class="cl">        <span class="n">anchor_boxes</span> <span class="o">=</span> <span class="n">set_anchors</span><span class="p">(</span><span class="n">anchor_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gt_box</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">box_ws</span><span class="p">,</span> <span class="n">box_hs</span><span class="p">]])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 计算先验框和真实框之间的IoU</span>
+</span></span><span class="line"><span class="cl">        <span class="n">iou</span> <span class="o">=</span> <span class="n">compute_iou</span><span class="p">(</span><span class="n">anchor_boxes</span><span class="p">,</span> <span class="n">gt_box</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 只保留大于ignore_thresh的先验框去做正样本匹配,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">iou_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">iou</span> <span class="o">&gt;</span> <span class="n">ignore_thresh</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">iou_mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 如果所有的先验框算出的IoU都小于阈值，那么就将IoU最大的那个先验框分配给正样本。</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 其他的先验框统统视为负样本。</span>
+</span></span><span class="line"><span class="cl">            <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">iou</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">p_w</span><span class="p">,</span> <span class="n">p_h</span> <span class="o">=</span> <span class="n">anchor_size</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tx</span> <span class="o">=</span> <span class="n">c_x_s</span> <span class="o">-</span> <span class="n">grid_x</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ty</span> <span class="o">=</span> <span class="n">c_y_s</span> <span class="o">-</span> <span class="n">grid_y</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">box_ws</span> <span class="o">/</span> <span class="n">p_w</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">box_hs</span> <span class="o">/</span> <span class="n">p_h</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">weight</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">-</span> <span class="p">(</span><span class="n">box_w</span> <span class="o">/</span> <span class="n">w</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">box_h</span> <span class="o">/</span> <span class="n">h</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">index</span><span class="p">,</span> <span class="n">grid_x</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">,</span> <span class="n">tx</span><span class="p">,</span> <span class="n">ty</span><span class="p">,</span> <span class="n">tw</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">result</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 有至少一个先验框的IoU超过了阈值.</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 但我们只保留超过阈值的那些先验框中IoU最大的，其他的先验框忽略掉，不参与loss计算。</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 而小于阈值的先验框统统视为负样本。</span>
+</span></span><span class="line"><span class="cl">            <span class="n">best_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">iou</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">iou_m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">iou_mask</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">iou_m</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="n">best_index</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">p_w</span><span class="p">,</span> <span class="n">p_h</span> <span class="o">=</span> <span class="n">anchor_size</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">tx</span> <span class="o">=</span> <span class="n">c_x_s</span> <span class="o">-</span> <span class="n">grid_x</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">ty</span> <span class="o">=</span> <span class="n">c_y_s</span> <span class="o">-</span> <span class="n">grid_y</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">tw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">box_ws</span> <span class="o">/</span> <span class="n">p_w</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">box_hs</span> <span class="o">/</span> <span class="n">p_h</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">weight</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">-</span> <span class="p">(</span><span class="n">box_w</span> <span class="o">/</span> <span class="n">w</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">box_h</span> <span class="o">/</span> <span class="n">h</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        
+</span></span><span class="line"><span class="cl">                        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">index</span><span class="p">,</span> <span class="n">grid_x</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">,</span> <span class="n">tx</span><span class="p">,</span> <span class="n">ty</span><span class="p">,</span> <span class="n">tw</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> \
+</span></span><span class="line"><span class="cl">                                        <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1"># 对于被忽略的先验框，我们将其权重weight设置为-1</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">index</span><span class="p">,</span> <span class="n">grid_x</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">result</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">gt_creator</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="n">stride</span><span class="p">,</span> <span class="n">label_lists</span><span class="p">,</span> <span class="n">anchor_size</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 必要的参数</span>
+</span></span><span class="line"><span class="cl">        <span class="n">batch_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_lists</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s</span> <span class="o">=</span> <span class="n">stride</span>
+</span></span><span class="line"><span class="cl">        <span class="n">w</span> <span class="o">=</span> <span class="n">input_size</span>
+</span></span><span class="line"><span class="cl">        <span class="n">h</span> <span class="o">=</span> <span class="n">input_size</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ws</span> <span class="o">=</span> <span class="n">w</span> <span class="o">//</span> <span class="n">s</span>
+</span></span><span class="line"><span class="cl">        <span class="n">hs</span> <span class="o">=</span> <span class="n">h</span> <span class="o">//</span> <span class="n">s</span>
+</span></span><span class="line"><span class="cl">        <span class="n">anchor_number</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">anchor_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 置信度 + 类别 + 锚框偏置信息 + 权重 + 锚框真实值。</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gt_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">hs</span><span class="p">,</span> <span class="n">ws</span><span class="p">,</span> <span class="n">anchor_number</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="mi">4</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="mi">4</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 制作正样本</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">batch_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">gt_label</span> <span class="ow">in</span> <span class="n">label_lists</span><span class="p">[</span><span class="n">batch_index</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">                <span class="c1"># get a bbox coords</span>
+</span></span><span class="line"><span class="cl">                <span class="n">gt_class</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">gt_label</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                <span class="n">results</span> <span class="o">=</span> <span class="n">generate_txtytwth</span><span class="p">(</span><span class="n">gt_label</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">anchor_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">results</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">index</span><span class="p">,</span> <span class="n">grid_x</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">,</span> <span class="n">tx</span><span class="p">,</span> <span class="n">ty</span><span class="p">,</span> <span class="n">tw</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">wxmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">result</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">if</span> <span class="n">weight</span> <span class="o">&gt;</span> <span class="mf">0.</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                            <span class="k">if</span> <span class="n">grid_y</span> <span class="o">&lt;</span> <span class="n">gt_tensor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="n">grid_x</span> <span class="o">&lt;</span> <span class="n">gt_tensor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">gt_tensor</span><span class="p">[</span><span class="n">batch_index</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">,</span> <span class="n">grid_x</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">gt_tensor</span><span class="p">[</span><span class="n">batch_index</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">,</span> <span class="n">grid_x</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">gt_class</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">gt_tensor</span><span class="p">[</span><span class="n">batch_index</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">,</span> <span class="n">grid_x</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">tx</span><span class="p">,</span> <span class="n">ty</span><span class="p">,</span> <span class="n">tw</span><span class="p">,</span> <span class="n">th</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">gt_tensor</span><span class="p">[</span><span class="n">batch_index</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">,</span> <span class="n">grid_x</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="n">weight</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">gt_tensor</span><span class="p">[</span><span class="n">batch_index</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">,</span> <span class="n">grid_x</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="mi">7</span><span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                            <span class="c1"># 对于那些被忽略的先验框，其gt_obj参数为-1，weight权重也是-1</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">gt_tensor</span><span class="p">[</span><span class="n">batch_index</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">,</span> <span class="n">grid_x</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">gt_tensor</span><span class="p">[</span><span class="n">batch_index</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">,</span> <span class="n">grid_x</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">gt_tensor</span> <span class="o">=</span> <span class="n">gt_tensor</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">hs</span> <span class="o">*</span> <span class="n">ws</span> <span class="o">*</span> <span class="n">anchor_number</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="mi">4</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">gt_tensor</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>仍是在batch size的维度上去遍历每一个样本，然后为每一个样本的每一个真实框去计算学习标签。</p>
+<p>在拿到一个真实框的数据后，<code>gt_creator</code>函数内部会调用<code>generate_txtytwth</code>函数去完成制作正样本的主要计算，其基本思路是先计算这个真实框的中心点所在的网格坐标，然后计算该真实框与此网格中的个先验框的IoU。</p>
+
     </div>
 
     <div class="post-copyright">
@@ -165,8 +994,7 @@
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/%E6%A0%87%E7%AD%BE/">标签</a>
-          <a href="/tags/%E6%A0%87%E7%AD%BE/">标签</a>
+          <a href="/tags/yolo/">YOLO</a>
           </div>
       <nav class="post-nav">
         <a class="prev" href="/post/yolov3/">

@@ -58,7 +58,7 @@
       <pubDate>Fri, 03 Feb 2023 19:53:42 +0800</pubDate>
       
       <guid>http://localhost:1313/post/yolov2/</guid>
-      <description></description>
+      <description>YOLO与其他模型的对比： 最大的不同：YOLO把网络分成很多的网格，而其他网络虽然也可以看做是分了很多的网格。 在YOLO中，如果物体的中心点</description>
     </item>
     
     <item>
@@ -95,15 +95,6 @@
       
       <guid>http://localhost:1313/post/hugo_1/</guid>
       <description>hugo简介 Hugo，也就是静态网站生成框架，构建了一套代码生成框架和各种可选的主题。可以帮助我们自动搭建好我们的个人博客网站，不需要关注任</description>
-    </item>
-    
-    <item>
-      <title>My First Post</title>
-      <link>http://localhost:1313/post/my-first-post/</link>
-      <pubDate>Fri, 03 Feb 2023 08:52:49 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/my-first-post/</guid>
-      <description># 这是我的第一篇博客 这是我的第一篇博客 个人网站链接</description>
     </item>
     
   </channel>

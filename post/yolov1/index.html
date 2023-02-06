@@ -48,7 +48,7 @@
 <meta itemprop="name" content="Yolov1">
 <meta itemprop="description" content="Yolo-v1: Free-anchor v1： 每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对"><meta itemprop="datePublished" content="2023-02-03T19:53:38+08:00" />
 <meta itemprop="dateModified" content="2023-02-03T19:53:38+08:00" />
-<meta itemprop="wordCount" content="4263">
+<meta itemprop="wordCount" content="4267">
 <meta itemprop="keywords" content="YOLO," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Yolov1"/>
 <meta name="twitter:description" content="Yolo-v1: Free-anchor v1： 每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对"/>
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"> 目标检测 </a>
             </div>
-          <span class="more-meta"> 约 4263 字 </span>
+          <span class="more-meta"> 约 4267 字 </span>
           <span class="more-meta"> 预计阅读 9 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -209,7 +209,7 @@
 <li>置信度，锚框的四个位置参数。两个锚框-&gt;一共10个框。</li>
 <li>20个类别 -&gt; num_class</li>
 </ul>
-<p>最后网络输出的预测参数总量：
+<p>最后网络输出的预测参数总量:
 $$
 S<em>S</em>(5*B + C)
 $$</p>
@@ -259,7 +259,7 @@ $$</p>
 <h4 id="反解中心点">反解中心点：</h4>
 <p>$$
 c_x = (grid_x + l_x) * stride,
-c_y = (grid_y + l_y) * stride,\
+c_y = (grid_y + l_y) * stride,\\
 w_{box} = w * w_{image},
 h_{box} = h * h_{image}
 $$</p>
@@ -267,7 +267,7 @@ $$</p>
 <p>若某个物体的中心落在这个网格中，则这个网格就负责预测这个物体。</p>
 <h2 id="损失函数">损失函数：</h2>
 <p>YOLO系列：class和offset只用正样本更新，只有confidence使用正负样本进行更新。</p>
-<p><img src="/Users/yangyanghaowei/Downloads/v2-e659942854f0a4f86056a9fc34efaa6a_b.jpg" alt="v2-e659942854f0a4f86056a9fc34efaa6a_b"></p>
+<p><img src="../../img/v2-e659942854f0a4f86056a9fc34efaa6a_b.png" alt="v2-e659942854f0a4f86056a9fc34efaa6a_b"></p>
 <ul>
 <li>前两行都是均方误差计算位置信息的损失。前面的1指的是正样本才计算位置损失函数与类别损失函数。</li>
 <li>有物体的地方，我们让网络去学习，逼近他。没有物体的地方，让置信度很低就行。</li>
@@ -279,10 +279,10 @@ $$</p>
 <h2 id="测试">测试：</h2>
 <h3 id="计算bbox和类别">计算bbox和类别：</h3>
 <p>$$
-center_x=(grid_x+c_x)×stride\</p>
-<p>center_y=(grid_y+c_y)×stride\</p>
-<p>w_{box}=w×w_{image}\</p>
-<p>h_{box}=h×h_{image}\</p>
+center_x=(grid_x+c_x)×stride\\</p>
+<p>center_y=(grid_y+c_y)×stride\\</p>
+<p>w_{box}=w×w_{image}\\</p>
+<p>h_{box}=h×h_{image}\\</p>
 <p>class = max(C_1,C_2&hellip;.C_{20})
 $$</p>
 <h3 id="计算每个边框的得分">计算每个边框的得分：</h3>
