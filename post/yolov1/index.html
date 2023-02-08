@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="杨浩伟" /><meta name="description" content="Yolo-v1: Free-anchor v1： 每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="杨浩伟" /><meta name="description" content="文章主要讨论Yolov1的输出值与损失函数，网络架构方面没有创新与难点。 Yolo-v1: YOLOv1不需要锚框。 Free-anchor v1： 每个网格处，有B个bbox，网络直" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,18 +40,18 @@
 
 
 <meta property="og:title" content="Yolov1" />
-<meta property="og:description" content="Yolo-v1: Free-anchor v1： 每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对" />
+<meta property="og:description" content="文章主要讨论Yolov1的输出值与损失函数，网络架构方面没有创新与难点。 Yolo-v1: YOLOv1不需要锚框。 Free-anchor v1： 每个网格处，有B个bbox，网络直" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/yolov1/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2023-02-03T19:53:38+08:00" />
 <meta property="article:modified_time" content="2023-02-03T19:53:38+08:00" />
 <meta itemprop="name" content="Yolov1">
-<meta itemprop="description" content="Yolo-v1: Free-anchor v1： 每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对"><meta itemprop="datePublished" content="2023-02-03T19:53:38+08:00" />
+<meta itemprop="description" content="文章主要讨论Yolov1的输出值与损失函数，网络架构方面没有创新与难点。 Yolo-v1: YOLOv1不需要锚框。 Free-anchor v1： 每个网格处，有B个bbox，网络直"><meta itemprop="datePublished" content="2023-02-03T19:53:38+08:00" />
 <meta itemprop="dateModified" content="2023-02-03T19:53:38+08:00" />
-<meta itemprop="wordCount" content="4291">
+<meta itemprop="wordCount" content="4450">
 <meta itemprop="keywords" content="YOLO," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Yolov1"/>
-<meta name="twitter:description" content="Yolo-v1: Free-anchor v1： 每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对"/>
+<meta name="twitter:description" content="文章主要讨论Yolov1的输出值与损失函数，网络架构方面没有创新与难点。 Yolo-v1: YOLOv1不需要锚框。 Free-anchor v1： 每个网格处，有B个bbox，网络直"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"> 目标检测 </a>
             </div>
-          <span class="more-meta"> 约 4291 字 </span>
+          <span class="more-meta"> 约 4450 字 </span>
           <span class="more-meta"> 预计阅读 9 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -182,8 +182,10 @@
 </div>
     <div class="post-content">
       <p><img src="../../img/Yolov1.png" alt="641667448499_.pic"></p>
+<p>文章主要讨论Yolov1的输出值与损失函数，网络架构方面没有创新与难点。</p>
 <h1 id="yolo-v1">Yolo-v1:</h1>
 <blockquote>
+<p>YOLOv1不需要锚框。</p>
 <p>Free-anchor v1：</p>
 <p>每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对应的bbox，进行反向传播位置参数。</p>
 <p>Free-anchor v2：</p>
@@ -211,10 +213,10 @@
 </ul>
 <p>最后网络输出的预测参数总量:
 $$
-S<em>S</em>(5*B + C)
-$$</p>
-<p>$$
+\begin{split}
+S<em>S</em>(5*B + C)\\
 S = \frac{输出图片尺寸}{网络的下采样倍数}
+\end{split}
 $$</p>
 <h3 id="置信度">置信度：</h3>
 <blockquote>
@@ -226,19 +228,21 @@ $$</p>
 <ul>
 <li>对于正样本(grid_x,grid_y)处，YOLO输出B个bbox</li>
 <li>计算这B个bbox与真实bbox的交并比，得到B个iou。</li>
-<li>选择其中iou最大的值作为置信度C的学习目标。</li>
-<li>也只让这个iou最大的bbox的位置信息去反向传播，其他B-1个框忽略。</li>
+<li>选择IOU最大的预测框作为正样本，去计算损失函数。其中iou最大的值作为置信度C的学习目标。</li>
+<li>对于剩下的没被选中的B-1个预测框，它们都被标记为负样本，即只计算置信度损失，且置信度标签都为0，这是显然的。这些负样本不计算类别损失和边界框回归损失。同时，对于那些处在正样本候选区域之外的预测，都标记为该标签的负样本，也只计算置信度损失。</li>
 </ul>
 </li>
 </ul>
 <h3 id="偏移值">偏移值：</h3>
 <p>给定一个真实的bbox坐标(Xmin,Ymin,Xmax,Ymax)，计算中心点及w,h:
 $$
+\begin{split}
 w = x_{max} - x_{min},
 h = y_{max} - y_{min},
-\\displaylines
+\\
 c_x = \frac{x_{min} + x_{max}}{2},
 c_y = \frac{y_{min} + y_{max}}{2}
+\end{split}
 $$
 获得中心点后，就可以得到落在网格的什么位置：
 $$
@@ -247,8 +251,8 @@ grad_y = int(\frac{c_y}{stride})
 $$
 中心点误差就出来了：
 $$
-l_x = c_x - grid_x,
-l_y = c_y - grid_y
+l_x = \frac{c_x}{stride} - grid_x,
+l_y = \frac{c_y}{stride} - grid_y
 $$
 <img src="../../img/v2-5b00009e92b5ebfac3bb2f5a36a615d5_b.png" alt="v2-5b00009e92b5ebfac3bb2f5a36a615d5_b"></p>
 <p>w,h必须进行归一化操作：
@@ -258,15 +262,17 @@ h = \frac{h}{h_{image}}
 $$</p>
 <h4 id="反解中心点">反解中心点：</h4>
 <p>$$
-c_x = (grid_x + l_x) * stride,
-c_y = (grid_y + l_y) * stride,\\displaylines
-w_{box} = w * w_{image},
+\begin{split}
+c_x = (grid_x + l_x) * stride,&amp;
+c_y = (grid_y + l_y) * stride,\\
+w_{box} = w * w_{image},&amp;
 h_{box} = h * h_{image}
+\end{split}
 $$</p>
 <h2 id="正负样本匹配">正负样本匹配：</h2>
 <p>若某个物体的中心落在这个网格中，则这个网格就负责预测这个物体。</p>
 <h2 id="损失函数">损失函数：</h2>
-<p>YOLO系列：class和offset只用正样本更新，只有confidence使用正负样本进行更新。</p>
+<p>YOLO系列：<strong>class和offset只用正样本更新，只有confidence使用正负样本进行更新</strong>。</p>
 <p><img src="../../img/v2-e659942854f0a4f86056a9fc34efaa6a_b.png" alt="v2-e659942854f0a4f86056a9fc34efaa6a_b"></p>
 <ul>
 <li>前两行都是均方误差计算位置信息的损失。前面的1指的是正样本才计算位置损失函数与类别损失函数。</li>

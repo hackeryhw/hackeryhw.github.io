@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Yolov3 - Yang’s Blog</title>
+  <title>Yolov3&#43;spp - Yang’s Blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="杨浩伟" /><meta name="description" content="" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="杨浩伟" /><meta name="description" content="目前来看，目标检测领域的baseline几乎已经被RetinaNet工作统治了，很多增量式的改进也都是在RetinaNet的基础上做的，往往" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -39,19 +39,19 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Yolov3" />
-<meta property="og:description" content="" />
+<meta property="og:title" content="Yolov3&#43;spp" />
+<meta property="og:description" content="目前来看，目标检测领域的baseline几乎已经被RetinaNet工作统治了，很多增量式的改进也都是在RetinaNet的基础上做的，往往" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/yolov3/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2023-02-03T19:53:44+08:00" />
 <meta property="article:modified_time" content="2023-02-03T19:53:44+08:00" />
-<meta itemprop="name" content="Yolov3">
-<meta itemprop="description" content=""><meta itemprop="datePublished" content="2023-02-03T19:53:44+08:00" />
+<meta itemprop="name" content="Yolov3&#43;spp">
+<meta itemprop="description" content="目前来看，目标检测领域的baseline几乎已经被RetinaNet工作统治了，很多增量式的改进也都是在RetinaNet的基础上做的，往往"><meta itemprop="datePublished" content="2023-02-03T19:53:44+08:00" />
 <meta itemprop="dateModified" content="2023-02-03T19:53:44+08:00" />
-<meta itemprop="wordCount" content="0">
+<meta itemprop="wordCount" content="1604">
 <meta itemprop="keywords" content="YOLO," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Yolov3"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="Yolov3&#43;spp"/>
+<meta name="twitter:description" content="目前来看，目标检测领域的baseline几乎已经被RetinaNet工作统治了，很多增量式的改进也都是在RetinaNet的基础上做的，往往"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -124,15 +124,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Yolov3</h1>
+      <h1 class="post-title">Yolov3&#43;spp</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2023-02-03 </span>
         <div class="post-category">
             <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"> 计算机视觉 </a>
             </div>
-          <span class="more-meta"> 约 0 字 </span>
-          <span class="more-meta"> 预计阅读 0 分钟 </span>
+          <span class="more-meta"> 约 1604 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -140,11 +140,72 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#yolo-v3">YOLO-v3:</a>
+      <ul>
+        <li><a href="#更好的主干网络">更好的主干网络：</a></li>
+        <li><a href="#更厉害的数据增强mosaic-augmentation">更厉害的数据增强：Mosaic Augmentation</a>
+          <ul>
+            <li><a href="#举例">举例：</a></li>
+          </ul>
+        </li>
+        <li><a href="#fpn与多级检测方法">FPN与多级检测方法：</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
-      
+      <p>目前来看，目标检测领域的baseline几乎已经被RetinaNet工作统治了，很多增量式的改进也都是在RetinaNet的基础上做的，往往Mask R-CNN和Faster R-CNN也会用上，毕竟是双阶段检测器的经典之作。</p>
+<ul>
+<li>RetinaNet的<strong>网络十分简洁</strong>，训练起来也没有太tricky的东西。</li>
+<li>RetinaNet的<strong>训练时间很短</strong>，通常只需要在COCO上训练12个epoch，数据增强也只需要使用随机水平翻转即可。</li>
+<li>YOLOv3往往需要在COCO上训练超过200个epoch，并且使用包括随机水平翻转、颜色扰动、随机剪裁和多尺度训练在内等大量的数据增强手段。</li>
+<li><strong>在解决实际问题时，YOLO系列更加受欢迎</strong>，毕竟在实际任务里，“实时性”是个很重要的指标，这一点恰恰是RetinaNet的劣势。YOLO性能强、速度快、计算量也要远小于RetinaNet，因此更适合用在实际部署中。</li>
+</ul>
+<h1 id="yolo-v3">YOLO-v3:</h1>
+<blockquote>
+<p>更好的主干网络：DarkNet-53</p>
+<p>FPN与多级检测方法，在YOLOv2上做增量。</p>
+<p>正负样本的匹配，损失函数均在v2中讲解。</p>
+<p>结论：对小目标的检测能力显著提升。</p>
+</blockquote>
+<h2 id="更好的主干网络">更好的主干网络：</h2>
+<p>YOLOv3的第一处改进便是换上了更好的backbone网络：DarkNet53。</p>
+<ul>
+<li>新的网络使用了更多的卷积—53层卷积</li>
+<li>同时，添加了残差网络中的残差连结结构，以提升网络的性能。</li>
+</ul>
+<p>在ImageNet数据集上，DarkNet53的top1准确率和top5准确率几乎与ResNet101和ResNet152持平，但速度却显著高于后两者。</p>
+<h2 id="更厉害的数据增强mosaic-augmentation">更厉害的数据增强：Mosaic Augmentation</h2>
+<p>可以显著提升检测器的性能，尤其是小目标的性能。其核心思想就是<strong>随机将4张图像拼接在一起</strong>，如图所示。</p>
+<p><img src="../../img/v2-cf349e091770aa93981c6610db724545_b.png" alt="img"></p>
+<h3 id="举例">举例：</h3>
+<p>假定输入图像是640x640，我们首先准备一个1280x1280的空白图像，依次将图像的最长边缩放到640，短边相应缩放。随机选择一个中心点，依次将四张图片拼接上去，最后将这张1280x1280的图像调整到640x640。</p>
+<p>大体上来看，我们相当于将一张原本640x640的图像，给调整至320，因此，图像中的目标都被缩小了，那么不难想到，<strong>马赛克增强</strong>可以有效提升小目标检测的性能。</p>
+<p>如果我们全程都采用马赛克增强，必然会使得模型对大目标的响应下降。</p>
+<p>为了缓解这一问题：</p>
+<ul>
+<li>我们在缩放每张图像的时候，缩放比例可以有所调整，默认为1，即将最长边缩放至640，最大的缩放比例为2，如此一来，图像的比例最终不会有变化，这在一定程度上可以缓解马赛克增强带来的负面效应。</li>
+<li>另一种策略就是在训练过程中，我们使用50%的概率来决定当前是否使用马赛克增强。</li>
+</ul>
+<p>马赛克数据增强的优点：</p>
+<ul>
+<li>增加数据多样性</li>
+<li>增加目标个数</li>
+<li>BN一次性统计多张图片参数—变相增加batch大小</li>
+</ul>
+<h2 id="fpn与多级检测方法">FPN与多级检测方法：</h2>
+<p>随着网络深度的加深，降采样操作的增多，细节信息不断被破坏，致使小物体的检测效果逐渐变差，而大目标由于像素较多，仅靠网络的前几层还不足以使得网络能够认识到大物体（感受野不充分），但随着层数变多，网络的感受野逐渐增大，网络对大目标的认识越来越充分，检测效果自然会更好。</p>
+<p>SSD：使用不同大小的特征图来检测不同尺度的目标	<strong>分而治之</strong></p>
+<p><strong>“分而治之”方法的内核不是FPN，而是多级检测</strong>。</p>
+<p>YOLOv3的关键改进便是使用了FPN结构与多级检测方法。YOLOv3在3个尺度上去进行预测，分别是经过8倍降采样的特征图C3、经过16倍降采样的特征图C4和经过32倍降采样的特征图C5。</p>
+<img src="/Users/yangyanghaowei/学习笔记/图片/v2-bf73703c3ef08459d59e85ffc92cb2ff_720w.png" alt="img" style="zoom:150%;" />
+<p>YOLOv3在<strong>每个网格处</strong>放置3个先验框。由于YOLOv3一共<strong>使用3个尺度（feature_map的尺度）</strong>，因此，YOLOv3一共设定了9个先验框，这9个先验框仍旧是使用kmeans聚类的方法获得的。</p>
+<p>每个尺度的网格都放置3个先验框，且每个先验框的预测仍旧是包括置信度、类别和位置参数（换言之，输出共包括objectness+class+bbox三部分输出），因此，<strong>每个尺度</strong>所预测的张量的通道数都是3×(1+C+4)。</p>
+
     </div>
 
     <div class="post-copyright">

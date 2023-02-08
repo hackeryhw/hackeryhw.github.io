@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Hugo支持数学公式 - Yang’s Blog</title>
+  <title>MAC系统下Terminal有执行权限时仍然报错 zsh: operation not permitted的解决办法 - Yang’s Blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="杨浩伟" /><meta name="description" content="直接配置config.toml文件以支持公式。 LaTeX与mathjax的区别： MathJax多行公式对齐 多行公式中常用的等号对齐：begi" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="杨浩伟" /><meta name="description" content="碰到了一件很离奇的事情，Terminal运行一个自己编写的shell脚本文件，在有chmod 777权限的情况下仍然无法运行。此时的shell" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.110.0 with theme even" />
 
 
-<link rel="canonical" href="http://localhost:1313/post/hugo_4/" />
+<link rel="canonical" href="http://localhost:1313/post/hugo_5/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,19 +39,19 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Hugo支持数学公式" />
-<meta property="og:description" content="直接配置config.toml文件以支持公式。 LaTeX与mathjax的区别： MathJax多行公式对齐 多行公式中常用的等号对齐：begi" />
+<meta property="og:title" content="MAC系统下Terminal有执行权限时仍然报错 zsh: operation not permitted的解决办法" />
+<meta property="og:description" content="碰到了一件很离奇的事情，Terminal运行一个自己编写的shell脚本文件，在有chmod 777权限的情况下仍然无法运行。此时的shell" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/post/hugo_4/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2023-02-06T17:51:27+08:00" />
-<meta property="article:modified_time" content="2023-02-06T17:51:27+08:00" />
-<meta itemprop="name" content="Hugo支持数学公式">
-<meta itemprop="description" content="直接配置config.toml文件以支持公式。 LaTeX与mathjax的区别： MathJax多行公式对齐 多行公式中常用的等号对齐：begi"><meta itemprop="datePublished" content="2023-02-06T17:51:27+08:00" />
-<meta itemprop="dateModified" content="2023-02-06T17:51:27+08:00" />
-<meta itemprop="wordCount" content="452">
-<meta itemprop="keywords" content="Hugo," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Hugo支持数学公式"/>
-<meta name="twitter:description" content="直接配置config.toml文件以支持公式。 LaTeX与mathjax的区别： MathJax多行公式对齐 多行公式中常用的等号对齐：begi"/>
+<meta property="og:url" content="http://localhost:1313/post/hugo_5/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-08T11:31:06+08:00" />
+<meta property="article:modified_time" content="2023-02-08T11:31:06+08:00" />
+<meta itemprop="name" content="MAC系统下Terminal有执行权限时仍然报错 zsh: operation not permitted的解决办法">
+<meta itemprop="description" content="碰到了一件很离奇的事情，Terminal运行一个自己编写的shell脚本文件，在有chmod 777权限的情况下仍然无法运行。此时的shell"><meta itemprop="datePublished" content="2023-02-08T11:31:06+08:00" />
+<meta itemprop="dateModified" content="2023-02-08T11:31:06+08:00" />
+<meta itemprop="wordCount" content="416">
+<meta itemprop="keywords" content="MAC使用," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MAC系统下Terminal有执行权限时仍然报错 zsh: operation not permitted的解决办法"/>
+<meta name="twitter:description" content="碰到了一件很离奇的事情，Terminal运行一个自己编写的shell脚本文件，在有chmod 777权限的情况下仍然无法运行。此时的shell"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -124,14 +124,14 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Hugo支持数学公式</h1>
+      <h1 class="post-title">MAC系统下Terminal有执行权限时仍然报错 zsh: operation not permitted的解决办法</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2023-02-06 </span>
+        <span class="post-time"> 2023-02-08 </span>
         <div class="post-category">
             <a href="/categories/%E8%BF%90%E7%BB%B4/"> 运维 </a>
             </div>
-          <span class="more-meta"> 约 452 字 </span>
+          <span class="more-meta"> 约 416 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -144,12 +144,8 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#latex与mathjax的区别">LaTeX与mathjax的区别：</a>
-          <ul>
-            <li><a href="#mathjax多行公式对齐">MathJax多行公式对齐</a></li>
-            <li><a href="#mathjax-不显示问题">Mathjax 不显示问题</a></li>
-          </ul>
-        </li>
+        <li><a href="#打开terminal完全磁盘访问权限">打开Terminal完全磁盘访问权限</a></li>
+        <li><a href="#删除来源于网络的标识">删除来源于网络的标识</a></li>
       </ul>
     </li>
   </ul>
@@ -157,42 +153,35 @@
   </div>
 </div>
     <div class="post-content">
-      <p>直接配置config.toml文件以支持公式。</p>
-<h2 id="latex与mathjax的区别">LaTeX与mathjax的区别：</h2>
-<h3 id="mathjax多行公式对齐">MathJax多行公式对齐</h3>
-<p>多行公式中常用的等号对齐：<code>begin{split}</code> 表示开始多行公式，<code>end{split}</code>表示结束；公式中用<code>\\</code>表示回车到下一行，<code>&amp;</code>表示对齐的位置。
-为了和 marked.js 兼容，公式内改为4个反斜线<code>\\\\</code>换行。</p>
+      <p>碰到了一件很离奇的事情，Terminal运行一个自己编写的shell脚本文件，在有chmod 777权限的情况下仍然无法运行。此时的shell文件是可以打开编辑的，但是Terminal无法启动。研究过后，这种情况有两种可能：</p>
+<ul>
+<li>Terminal的权限问题</li>
+<li>由于下载的文件来源于网络，所以被系统锁定。</li>
+</ul>
+<h2 id="打开terminal完全磁盘访问权限">打开Terminal完全磁盘访问权限</h2>
+<p>系统-&gt;安全性与隐私-&gt;完全磁盘访问权限，找到终端，开启权限。</p>
+<h2 id="删除来源于网络的标识">删除来源于网络的标识</h2>
+<p>这里的内容参考至<a href="https://link.zhihu.com/?target=https%3A//www.alansiu.net/2021/08/19/troubleshooting-zsh-operation-not-permitted/">Troubleshooting “zsh: operation not permitted”</a></p>
+<p>简单来说，如果文件来自于网路，苹果系统会阻止你运行，运行下面指令：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-Latex" data-lang="Latex"><span class="line"><span class="cl"><span class="k">\begin</span><span class="nb">{</span>split<span class="nb">}</span>
-</span></span><span class="line"><span class="cl">center<span class="nb">_</span>x<span class="nb">&amp;</span>=(grid<span class="nb">_</span>x+c<span class="nb">_</span>x)×stride,<span class="k">\\\\</span>
-</span></span><span class="line"><span class="cl">center<span class="nb">_</span>y<span class="nb">&amp;</span>=(grid<span class="nb">_</span>y+c<span class="nb">_</span>y)×stride,<span class="k">\\\\</span>
-</span></span><span class="line"><span class="cl">w<span class="nb">_{</span>box<span class="nb">}&amp;</span>=w×w<span class="nb">_{</span>image<span class="nb">}</span><span class="k">\\\\</span>
-</span></span><span class="line"><span class="cl">h<span class="nb">_{</span>box<span class="nb">}&amp;</span>=h×h<span class="nb">_{</span>image<span class="nb">}</span><span class="k">\\\\</span>
-</span></span><span class="line"><span class="cl">class <span class="nb">&amp;</span>= max(C<span class="nb">_</span>1,C<span class="nb">_</span>2....C<span class="nb">_{</span>20<span class="nb">}</span>)
-</span></span><span class="line"><span class="cl"><span class="k">\end</span><span class="nb">{</span>split<span class="nb">}</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">xattr -l /PATH/TO/SCRIPTYOUCANTRUN.sh
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>$$
-\begin{split}
-center_x&amp;=(grid_x+c_x)×stride,\\
-center_y&amp;=(grid_y+c_y)×stride,\\
-w_{box}&amp;=w×w_{image}\\
-h_{box}&amp;=h×h_{image}\\
-class &amp;= max(C_1,C_2&hellip;.C_{20})
-\end{split}
-$$</p>
-<h3 id="mathjax-不显示问题">Mathjax 不显示问题</h3>
-<p>Mathjax公式之间不能有空行。</p>
+</div><p>如果返回 com.apple.quarantine 的信息，那么说明文件来源于网络。如果你自己不信任此脚本就不要打开了，找找别的方法。如果信任的话，可以用下面的指令删除来源于网络的标签。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">xattr -d com.apple.quarantine /PATH/TO/SCRIPTYOUCANTRUN.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此后应该就能打开了。</p>
+<p>经测试，自己编写的脚本也可能被MAC锁定，所以上面方法也可适用于自己编写的脚本文件。</p>
 
     </div>
 
@@ -204,7 +193,7 @@ $$</p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2023-02-06
+        2023-02-08
         
     </span>
   </p>
@@ -213,16 +202,12 @@ $$</p>
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/hugo/">Hugo</a>
+          <a href="/tags/mac%E4%BD%BF%E7%94%A8/">MAC使用</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/yolov3resource/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">YOLOv3&#43;Spp源码详解</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/yolov7/">
-            <span class="next-text nav-default">Yolov7</span>
+        
+        <a class="next" href="/post/detector/">
+            <span class="next-text nav-default">Detector</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

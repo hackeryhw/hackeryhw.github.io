@@ -6,7 +6,34 @@
     <description>Recent content on Yang’s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 06 Feb 2023 17:51:27 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Feb 2023 11:31:06 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MAC系统下Terminal有执行权限时仍然报错 zsh: operation not permitted的解决办法</title>
+      <link>http://localhost:1313/post/hugo_5/</link>
+      <pubDate>Wed, 08 Feb 2023 11:31:06 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/hugo_5/</guid>
+      <description>碰到了一件很离奇的事情，Terminal运行一个自己编写的shell脚本文件，在有chmod 777权限的情况下仍然无法运行。此时的shell</description>
+    </item>
+    
+    <item>
+      <title>Detector</title>
+      <link>http://localhost:1313/post/detector/</link>
+      <pubDate>Wed, 08 Feb 2023 10:11:29 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/detector/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>YOLOv3&#43;Spp源码详解</title>
+      <link>http://localhost:1313/post/yolov3resource/</link>
+      <pubDate>Wed, 08 Feb 2023 09:27:55 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/yolov3resource/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Hugo支持数学公式</title>
       <link>http://localhost:1313/post/hugo_4/</link>
@@ -53,12 +80,12 @@
     </item>
     
     <item>
-      <title>Yolov3</title>
+      <title>Yolov3&#43;spp</title>
       <link>http://localhost:1313/post/yolov3/</link>
       <pubDate>Fri, 03 Feb 2023 19:53:44 +0800</pubDate>
       
       <guid>http://localhost:1313/post/yolov3/</guid>
-      <description></description>
+      <description>目前来看，目标检测领域的baseline几乎已经被RetinaNet工作统治了，很多增量式的改进也都是在RetinaNet的基础上做的，往往</description>
     </item>
     
     <item>
@@ -76,7 +103,7 @@
       <pubDate>Fri, 03 Feb 2023 19:53:38 +0800</pubDate>
       
       <guid>http://localhost:1313/post/yolov1/</guid>
-      <description>Yolo-v1: Free-anchor v1： 每个网格处，有B个bbox，网络直接每个bbox输出位置信息的四个值。经过反解生成锚框(bushi)。去算iou，取最大的iou对</description>
+      <description>文章主要讨论Yolov1的输出值与损失函数，网络架构方面没有创新与难点。 Yolo-v1: YOLOv1不需要锚框。 Free-anchor v1： 每个网格处，有B个bbox，网络直</description>
     </item>
     
     <item>
