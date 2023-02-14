@@ -6,7 +6,52 @@
     <description>Recent content in Posts on Yang’s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 08 Feb 2023 11:31:06 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 14 Feb 2023 09:07:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>通过梯度上升可视化CNN</title>
+      <link>http://localhost:1313/post/cnnvision_1/</link>
+      <pubDate>Tue, 14 Feb 2023 09:07:25 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cnnvision_1/</guid>
+      <description>如果有一个方法，你可以轻松理解这个方法的原理，你可能会觉得他不够intelligent；他必须是你无法理解的东西，你才会觉得他intelli</description>
+    </item>
+    
+    <item>
+      <title>KD</title>
+      <link>http://localhost:1313/post/kd/</link>
+      <pubDate>Mon, 13 Feb 2023 17:16:04 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/kd/</guid>
+      <description>知识蒸馏 背景 最初由Hinton提出，与Label smoothing动机类似，但是KD 是通过教师网络得到soft labeling。KD可以视为</description>
+    </item>
+    
+    <item>
+      <title>为什么YOLOv3分类损失使用BCE</title>
+      <link>http://localhost:1313/post/bce_ce/</link>
+      <pubDate>Mon, 13 Feb 2023 14:29:02 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/bce_ce/</guid>
+      <description>文章主要通过不同的任务介绍BCE与CE。 图像二分类： Sigmoid函数和Softmax函数用于表示概率在二分类问题中没有什么问题。其后都可以</description>
+    </item>
+    
+    <item>
+      <title>Car</title>
+      <link>http://localhost:1313/post/car/</link>
+      <pubDate>Mon, 13 Feb 2023 11:18:24 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/car/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>模型压缩</title>
+      <link>http://localhost:1313/post/yasuo/</link>
+      <pubDate>Sun, 12 Feb 2023 16:54:02 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/yasuo/</guid>
+      <description>模型压缩目的： 减少模型大小 加快训练速度 保持相同精度 模型压缩四件套： 量化 蒸馏 剪枝 二值化 模型低比特量化： 量化基础： 将浮点计算转化成低比特定点计算</description>
+    </item>
+    
     <item>
       <title>MAC系统下Terminal有执行权限时仍然报错 zsh: operation not permitted的解决办法</title>
       <link>http://localhost:1313/post/hugo_5/</link>
@@ -31,7 +76,7 @@
       <pubDate>Wed, 08 Feb 2023 09:27:55 +0800</pubDate>
       
       <guid>http://localhost:1313/post/yolov3resource/</guid>
-      <description></description>
+      <description>训练脚本详解： train函数 全部工作： 参数复制 图片大小设置：设置成32的倍数；多尺度训练问题。 模型问题：初始化模型；冻结参数。 优化器、混合精</description>
     </item>
     
     <item>

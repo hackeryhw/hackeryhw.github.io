@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>汽车原理 on Yang’s Blog</title>
+    <link>http://localhost:1313/tags/%E6%B1%BD%E8%BD%A6%E5%8E%9F%E7%90%86/</link>
+    <description>Recent content in 汽车原理 on Yang’s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 13 Feb 2023 11:18:24 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%B1%BD%E8%BD%A6%E5%8E%9F%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Car</title>
+      <link>http://localhost:1313/post/car/</link>
+      <pubDate>Mon, 13 Feb 2023 11:18:24 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/car/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

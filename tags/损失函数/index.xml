@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>损失函数 on Yang’s Blog</title>
+    <link>http://localhost:1313/tags/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/</link>
+    <description>Recent content in 损失函数 on Yang’s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 13 Feb 2023 14:29:02 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>为什么YOLOv3分类损失使用BCE</title>
+      <link>http://localhost:1313/post/bce_ce/</link>
+      <pubDate>Mon, 13 Feb 2023 14:29:02 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/bce_ce/</guid>
+      <description>文章主要通过不同的任务介绍BCE与CE。 图像二分类： Sigmoid函数和Softmax函数用于表示概率在二分类问题中没有什么问题。其后都可以</description>
+    </item>
+    
+  </channel>
+</rss>

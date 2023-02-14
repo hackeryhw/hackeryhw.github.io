@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>MAC系统下Terminal有执行权限时仍然报错 zsh: operation not permitted的解决办法 - Yang’s Blog</title>
+  <title>模型压缩 - Yang’s Blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="杨浩伟" /><meta name="description" content="碰到了一件很离奇的事情，Terminal运行一个自己编写的shell脚本文件，在有chmod 777权限的情况下仍然无法运行。此时的shell" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="杨浩伟" /><meta name="description" content="模型压缩目的： 减少模型大小 加快训练速度 保持相同精度 模型压缩四件套： 量化 蒸馏 剪枝 二值化 模型低比特量化： 量化基础： 将浮点计算转化成低比特定点计算" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.110.0 with theme even" />
 
 
-<link rel="canonical" href="http://localhost:1313/post/hugo_5/" />
+<link rel="canonical" href="http://localhost:1313/post/yasuo/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,19 +39,19 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="MAC系统下Terminal有执行权限时仍然报错 zsh: operation not permitted的解决办法" />
-<meta property="og:description" content="碰到了一件很离奇的事情，Terminal运行一个自己编写的shell脚本文件，在有chmod 777权限的情况下仍然无法运行。此时的shell" />
+<meta property="og:title" content="模型压缩" />
+<meta property="og:description" content="模型压缩目的： 减少模型大小 加快训练速度 保持相同精度 模型压缩四件套： 量化 蒸馏 剪枝 二值化 模型低比特量化： 量化基础： 将浮点计算转化成低比特定点计算" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/post/hugo_5/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2023-02-08T11:31:06+08:00" />
-<meta property="article:modified_time" content="2023-02-08T11:31:06+08:00" />
-<meta itemprop="name" content="MAC系统下Terminal有执行权限时仍然报错 zsh: operation not permitted的解决办法">
-<meta itemprop="description" content="碰到了一件很离奇的事情，Terminal运行一个自己编写的shell脚本文件，在有chmod 777权限的情况下仍然无法运行。此时的shell"><meta itemprop="datePublished" content="2023-02-08T11:31:06+08:00" />
-<meta itemprop="dateModified" content="2023-02-08T11:31:06+08:00" />
-<meta itemprop="wordCount" content="416">
-<meta itemprop="keywords" content="MAC使用," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="MAC系统下Terminal有执行权限时仍然报错 zsh: operation not permitted的解决办法"/>
-<meta name="twitter:description" content="碰到了一件很离奇的事情，Terminal运行一个自己编写的shell脚本文件，在有chmod 777权限的情况下仍然无法运行。此时的shell"/>
+<meta property="og:url" content="http://localhost:1313/post/yasuo/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-12T16:54:02+08:00" />
+<meta property="article:modified_time" content="2023-02-12T16:54:02+08:00" />
+<meta itemprop="name" content="模型压缩">
+<meta itemprop="description" content="模型压缩目的： 减少模型大小 加快训练速度 保持相同精度 模型压缩四件套： 量化 蒸馏 剪枝 二值化 模型低比特量化： 量化基础： 将浮点计算转化成低比特定点计算"><meta itemprop="datePublished" content="2023-02-12T16:54:02+08:00" />
+<meta itemprop="dateModified" content="2023-02-12T16:54:02+08:00" />
+<meta itemprop="wordCount" content="885">
+<meta itemprop="keywords" content="低比特量化," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="模型压缩"/>
+<meta name="twitter:description" content="模型压缩目的： 减少模型大小 加快训练速度 保持相同精度 模型压缩四件套： 量化 蒸馏 剪枝 二值化 模型低比特量化： 量化基础： 将浮点计算转化成低比特定点计算"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -124,15 +124,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">MAC系统下Terminal有执行权限时仍然报错 zsh: operation not permitted的解决办法</h1>
+      <h1 class="post-title">模型压缩</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2023-02-08 </span>
+        <span class="post-time"> 2023-02-12 </span>
         <div class="post-category">
-            <a href="/categories/%E8%BF%90%E7%BB%B4/"> 运维 </a>
+            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/"> 深度学习基础 </a>
             </div>
-          <span class="more-meta"> 约 416 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+          <span class="more-meta"> 约 885 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -144,8 +144,17 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#打开terminal完全磁盘访问权限">打开Terminal完全磁盘访问权限</a></li>
-        <li><a href="#删除来源于网络的标识">删除来源于网络的标识</a></li>
+        <li><a href="#模型低比特量化">模型低比特量化：</a>
+          <ul>
+            <li><a href="#量化基础">量化基础：</a></li>
+            <li><a href="#模型量化优点">模型量化优点：</a></li>
+            <li><a href="#量化问题">量化问题：</a></li>
+            <li><a href="#量化方法">量化方法：</a></li>
+            <li><a href="#量化原理">量化原理：</a></li>
+            <li><a href="#量化类型">量化类型</a></li>
+          </ul>
+        </li>
+        <li><a href="#感知量化qat">感知量化QAT</a></li>
       </ul>
     </li>
   </ul>
@@ -153,35 +162,97 @@
   </div>
 </div>
     <div class="post-content">
-      <p>碰到了一件很离奇的事情，Terminal运行一个自己编写的shell脚本文件，在有chmod 777权限的情况下仍然无法运行。此时的shell文件是可以打开编辑的，但是Terminal无法启动。研究过后，这种情况有两种可能：</p>
+      <p><strong>模型压缩目的</strong>：</p>
 <ul>
-<li>Terminal的权限问题</li>
-<li>由于下载的文件来源于网络，所以被系统锁定。</li>
+<li>减少模型大小</li>
+<li>加快训练速度</li>
+<li>保持相同精度</li>
 </ul>
-<h2 id="打开terminal完全磁盘访问权限">打开Terminal完全磁盘访问权限</h2>
-<p>系统-&gt;安全性与隐私-&gt;完全磁盘访问权限，找到终端，开启权限。</p>
-<h2 id="删除来源于网络的标识">删除来源于网络的标识</h2>
-<p>这里的内容参考至<a href="https://link.zhihu.com/?target=https%3A//www.alansiu.net/2021/08/19/troubleshooting-zsh-operation-not-permitted/">Troubleshooting “zsh: operation not permitted”</a></p>
-<p>简单来说，如果文件来自于网路，苹果系统会阻止你运行，运行下面指令：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">xattr -l /PATH/TO/SCRIPTYOUCANTRUN.sh
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>如果返回 com.apple.quarantine 的信息，那么说明文件来源于网络。如果你自己不信任此脚本就不要打开了，找找别的方法。如果信任的话，可以用下面的指令删除来源于网络的标签。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">xattr -d com.apple.quarantine /PATH/TO/SCRIPTYOUCANTRUN.sh
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>此后应该就能打开了。</p>
-<p>经测试，自己编写的脚本也可能被MAC锁定，所以上面方法也可适用于自己编写的脚本文件。</p>
+<p><strong>模型压缩四件套</strong>：</p>
+<ul>
+<li>量化</li>
+<li>蒸馏</li>
+<li>剪枝</li>
+<li>二值化</li>
+</ul>
+<h2 id="模型低比特量化">模型低比特量化：</h2>
+<h3 id="量化基础">量化基础：</h3>
+<p>将浮点计算转化成低比特定点计算的技术，可有效减少计算强度，参数大小和内存消耗，但是会代码不小的精度损失。尤其在极低比特(&lt;4bit)，二值网络(1bit)，甚至将提督进行量化时，精度挑战更大。</p>
+<h3 id="模型量化优点">模型量化优点：</h3>
+<ul>
+<li><strong>保持精度</strong>：量化会损失精度，相当于给网络加入噪音，但是神经网络对噪音一般不太敏感，所以只要把控好量化力度，对任务的精度影响不是很大。</li>
+<li><strong>加速计算</strong>：传统卷积都是FP32浮点运算，低比特数据可以减少大量的计算性能。
+<ul>
+<li>提升推理速度。</li>
+</ul>
+</li>
+<li><strong>节省内存</strong>：与FP32相比，FP16，INT8，INT4所占空间更小。
+<ul>
+<li>降低运算内存消耗和模型存储内存消耗。</li>
+</ul>
+</li>
+<li>功耗降低</li>
+</ul>
+<h3 id="量化问题">量化问题：</h3>
+<ul>
+<li>为什么模型量化能够对实际部署起到加速作用？
+<ul>
+<li>软件算法上的优化不一定总会增加效率，因为硬件不一定支持相应的的优化。</li>
+</ul>
+</li>
+<li>为什么需要对网络模型进行量化压缩呢？
+<ul>
+<li>边缘设备。</li>
+</ul>
+</li>
+<li>为什么不直接训练低精度的模型呢？
+<ul>
+<li>低精度会限制模型的能力。</li>
+</ul>
+</li>
+<li>什么情况下不应该/应该使用模型量化？
+<ul>
+<li>不应该：不是很大或者效果不好的模型</li>
+<li>应该：模型很大</li>
+</ul>
+</li>
+</ul>
+<h3 id="量化方法">量化方法：</h3>
+<ul>
+<li>感知量化训练（QAT）：量化训练让模型感知量化运算对模型精度带来的影响
+<ul>
+<li>通过dinetune训练来降低量化误差</li>
+</ul>
+</li>
+<li>动态离线量化（PTQ Dynamic）：仅将模型中特定算子的权重从FP32映射成INT8/16</li>
+<li>静态离线量化（PTQ Static）：使用少量无标签校准数据</li>
+</ul>
+<h4 id="量化方法对比">量化方法对比：</h4>
+<p><img src="../../img/5.07.22.png" alt="Screen Shot 2023-02-13 at 15.07.22"></p>
+<h3 id="量化原理">量化原理：</h3>
+<p>量化桥接定点与浮点，建立一种有效的现行数据映射关系，使得以较小的精度损失代价获得较好的收益。</p>
+<p>下图中，左图为一般量化，将浮点数的表示范围映射到INT8的[-127,127]。右图为截断量化，人为指定浮点数的[-T,T]映射到INT8的[-127,127]。</p>
+<p><img src="../../img/929_r.png" alt="img"></p>
+<h4 id="如何映射呢">如何映射呢：</h4>
+<p>浮点与定点数据的转换公式：
+$$
+\begin{split}
+Q &amp;= \frac{R}{S} + Z \\
+R &amp;= (Q-Z) * S
+\end{split}
+$$
+其中 R表示输入浮点数；Q表示量化后的定点数；Z表示零点数值，用于非对称映射；S表示缩放因子。</p>
+<p>求解<code>S</code>和<code>Z</code>
+$$
+\begin{split}
+S =&amp; \frac{R_{max} - R_{min}}{Q_{max} - Q_{min}} \\
+Z =&amp; Q_{max} - R_{max} / S
+\end{split}
+$$</p>
+<h3 id="量化类型">量化类型</h3>
+<p>线性量化可分为对称量化与非对称量化.</p>
+<p><img src="../../img/15.15.49.png" alt="Screen Shot 2023-02-13 at 15.15.49"></p>
+<h2 id="感知量化qat">感知量化QAT</h2>
 
     </div>
 
@@ -193,7 +264,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2023-02-08
+        2023-02-12
         
     </span>
   </p>
@@ -202,16 +273,16 @@
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/mac%E4%BD%BF%E7%94%A8/">MAC使用</a>
+          <a href="/tags/%E4%BD%8E%E6%AF%94%E7%89%B9%E9%87%8F%E5%8C%96/">低比特量化</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/yasuo/">
+        <a class="prev" href="/post/car/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">模型压缩</span>
+            <span class="prev-text nav-default">Car</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/detector/">
-            <span class="next-text nav-default">Detector</span>
+        <a class="next" href="/post/hugo_5/">
+            <span class="next-text nav-default">MAC系统下Terminal有执行权限时仍然报错 zsh: operation not permitted的解决办法</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

@@ -13,7 +13,7 @@
       <pubDate>Wed, 08 Feb 2023 09:27:55 +0800</pubDate>
       
       <guid>http://localhost:1313/post/yolov3resource/</guid>
-      <description></description>
+      <description>训练脚本详解： train函数 全部工作： 参数复制 图片大小设置：设置成32的倍数；多尺度训练问题。 模型问题：初始化模型；冻结参数。 优化器、混合精</description>
     </item>
     
   </channel>

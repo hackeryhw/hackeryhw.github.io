@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>通过梯度上升可视化CNN - Yang’s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="杨浩伟" /><meta name="description" content="如果有一个方法，你可以轻松理解这个方法的原理，你可能会觉得他不够intelligent；他必须是你无法理解的东西，你才会觉得他intelli" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.110.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/cnnvision_1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="通过梯度上升可视化CNN" />
+<meta property="og:description" content="如果有一个方法，你可以轻松理解这个方法的原理，你可能会觉得他不够intelligent；他必须是你无法理解的东西，你才会觉得他intelli" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/cnnvision_1/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-14T09:07:25+08:00" />
+<meta property="article:modified_time" content="2023-02-14T09:07:25+08:00" />
+<meta itemprop="name" content="通过梯度上升可视化CNN">
+<meta itemprop="description" content="如果有一个方法，你可以轻松理解这个方法的原理，你可能会觉得他不够intelligent；他必须是你无法理解的东西，你才会觉得他intelli"><meta itemprop="datePublished" content="2023-02-14T09:07:25+08:00" />
+<meta itemprop="dateModified" content="2023-02-14T09:07:25+08:00" />
+<meta itemprop="wordCount" content="1852">
+<meta itemprop="keywords" content="CNN可视化," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="通过梯度上升可视化CNN"/>
+<meta name="twitter:description" content="如果有一个方法，你可以轻松理解这个方法的原理，你可能会觉得他不够intelligent；他必须是你无法理解的东西，你才会觉得他intelli"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Yang’s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Yang’s Blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">通过梯度上升可视化CNN</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-02-14 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/"> 深度学习基础 </a>
+            </div>
+          <span class="more-meta"> 约 1852 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#what-dose-cnn-learn">what dose CNN learn？</a></li>
+        <li><a href="#实现细节">实现细节：</a>
+          <ul>
+            <li><a href="#1torch如何得到中间层输出">1.torch如何得到中间层输出</a></li>
+            <li><a href="#2损失函数实现细节">2.损失函数实现细节</a></li>
+            <li><a href="#3优化器实现细节">3.优化器实现细节</a></li>
+            <li><a href="#4解码图像">4.解码图像</a></li>
+          </ul>
+        </li>
+        <li><a href="#可视化结果">可视化结果</a></li>
+        <li><a href="#总结">总结：</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>如果有一个方法，你可以轻松理解这个方法的原理，你可能会觉得他不够intelligent；他必须是你无法理解的东西，你才会觉得他intelligent。</p>
+<p>大家常说deep learning就是一个黑盒子，你learn出来以后，根本就不知道为什么是这样子，于是你会感觉它很intelligent，但是其实还是有很多方法可以分析的。</p>
+<p>对于两层的CNN来说，要分析第一层的CNN，其实很简单，因为第一层的conv中，每个filter是一个3x3的矩阵，对应图像上的9个像素，所以你只要看这个filter的值，就可以知道这个filter在检测什么东西。</p>
+<p>但是第二层的filter是没有什么办法知道他在检测什么东西。因为通过第一层的卷积层和池化层以后，这个filter考虑的不再是像素，就算把weight拿出来，也不知道他在干什么。</p>
+<img src="../../img/09.25.26.png" alt="Screen Shot 2023-02-14 at 09.25.26"  />
+<h2 id="what-dose-cnn-learn">what dose CNN learn？</h2>
+<p>我们知道第二个卷积层输出50个特征图，每个特征图是11x11的矩阵。我们现在取出第K个特征图，对于第K个特征图中的每一个元素，我们使用$a_{ij}^k$表示。现在我们声明一个激活函数$F$，它表示第K个特征图它有多被激活。
+$$
+F = \sum_{i=1}^{11}\sum_{j=1}^{11}a_{ij}^k
+$$
+我们input一张image，然后把这个filter和image进行卷积所output的11*11个值全部加起来，当作现在这个filter被activate的程度。</p>
+<p>接下来我们想知道第K个filter的作用，那就找一张图像，这张图片可以让第K个filter被激活的程度最大：
+$$
+x = \underset{x}{\arg\max} a^k
+$$
+现在我们通过梯度上升就可以做到这件事。</p>
+<p>原来的做法：我们输入数据，通过前向传播得到输出，然后损失函数求的损失，再反向传播更新参数。</p>
+<p>现在我们输入数据，通过前向传播得到输出，然后激活函数求出激活值，再求导直接更新输入数据。</p>
+<blockquote>
+<p>原来使用反向传播是要更新每一层的参数，而现在只用更新输入数据的参数，只用求一次导，当然用不到反向传播了。</p>
+</blockquote>
+<h2 id="实现细节">实现细节：</h2>
+<h3 id="1torch如何得到中间层输出">1.torch如何得到中间层输出</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">model</span> <span class="o">=</span> <span class="n">vgg</span><span class="o">.</span><span class="n">features</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 取得vgg 特征层的前index层组成自模型</span>
+</span></span><span class="line"><span class="cl"><span class="n">submodel</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">children</span><span class="p">())[:</span><span class="n">index</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">output</span> <span class="o">=</span> <span class="n">submodel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="2损失函数实现细节">2.损失函数实现细节</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Loss</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">super</span><span class="p">(</span><span class="n">Loss</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">      	<span class="c1"># 第K个filter输出取平均</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span><span class="n">k</span><span class="p">,</span><span class="o">...</span><span class="p">])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="3优化器实现细节">3.优化器实现细节</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># 继承自torch.optim.Optimizer</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">optimizer</span><span class="p">(</span><span class="n">Optimizer</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  	<span class="c1"># 传入params 和 其他参数</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">lr</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">super</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">params</span><span class="p">,{})</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">lr</span> <span class="o">=</span> <span class="n">lr</span>
+</span></span><span class="line"><span class="cl">		<span class="c1"># closure 参数必须要有</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">closure</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">      <span class="c1"># 两层循环固定形式，这样才能拿到参数</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_groups</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">params</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="s2">&#34;params&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">para</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">para</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">para</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">lr</span> <span class="o">*</span> <span class="n">para</span><span class="o">.</span><span class="n">grad</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>多说一些，之前对这些概念很模糊，现在梳理一下：</p>
+<ul>
+<li>参数想要更新声明时必须<code>requires_grad</code>，然后就不用管了，想要对哪个运算结果求导，运算结果的那个tensor直接<code>backward</code>，参与运算的所有需要求导的<code>tensor</code>就可以通过<code>tensor.grad</code>获得导数。</li>
+<li>优化器只是拿到需要更新的参数，通过优化算法更新传入的参数。</li>
+<li>优化器，损失函数，求导是完全解耦的。</li>
+</ul>
+<h3 id="4解码图像">4.解码图像</h3>
+<p>如何将随便的数据映射到0～255之间呢？</p>
+<ul>
+<li>通过最大最小值缩放到0～1，然后x255，转换成uint8类型。</li>
+<li>先标准化为均值为0，方差为1的数据，然后同乘0.1，使得方差变为0.1，此时数据高度集中，数据加0.5，再裁减到0～1，再乘255，再裁减并转换成uint8类型。</li>
+<li>torch变换类型：tensor.to(dtype=torch.int)</li>
+<li>numpy转换类型：ndarray.astype(&ldquo;uint8&rdquo;)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">decode_img</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="n">img</span> <span class="o">-=</span> <span class="n">img</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">img</span> <span class="o">/=</span> <span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">+</span> <span class="mf">1e-5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">img</span> <span class="o">*=</span> <span class="mf">0.1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">img</span> <span class="o">+=</span> <span class="mf">0.5</span>
+</span></span><span class="line"><span class="cl">        <span class="n">img</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">img</span> <span class="o">*=</span> <span class="mi">255</span>
+</span></span><span class="line"><span class="cl">        <span class="n">img</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">img</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="5-主函数">5. 主函数</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">generate_pattern</span><span class="p">(</span><span class="n">submodel</span><span class="p">,</span><span class="n">index</span><span class="p">,</span><span class="n">filter_idx</span><span class="p">,</span><span class="n">img_size</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  	<span class="c1"># 获得子模型输出</span>
+</span></span><span class="line"><span class="cl">    <span class="n">submodel</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">submodel</span><span class="o">.</span><span class="n">children</span><span class="p">())[:</span><span class="n">index</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># requires_grad=True</span>
+</span></span><span class="line"><span class="cl">    <span class="n">img</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">img_size</span><span class="p">,</span><span class="n">img_size</span><span class="p">),</span><span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 传入img，指定img需要更新</span>
+</span></span><span class="line"><span class="cl">    <span class="n">opti</span> <span class="o">=</span> <span class="n">optimizer</span><span class="p">([</span><span class="n">img</span><span class="p">],</span><span class="n">lr</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">loss</span> <span class="o">=</span> <span class="n">Loss</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">    <span class="n">bar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">),</span><span class="n">desc</span><span class="o">=</span><span class="s2">&#34;梯度上升,开始&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">bar</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">opti</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">output</span> <span class="o">=</span> <span class="n">submodel</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">L</span> <span class="o">=</span> <span class="n">loss</span><span class="p">(</span><span class="n">output</span><span class="p">,</span><span class="n">filter_idx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">L</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">opti</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">bar</span><span class="o">.</span><span class="n">desc</span> <span class="o">=</span> <span class="s2">&#34;激活值</span><span class="si">{0}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="c1"># 解码图片</span>
+</span></span><span class="line"><span class="cl">    <span class="n">img</span> <span class="o">=</span> <span class="n">decode_img</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">img</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="可视化结果">可视化结果</h2>
+<p>前两张图片提取的是数据的细节信息，后两张图片提取数据的语义信息(抽象信息)。</p>
+<p><img src="../../img/conv5.png" alt="conv5"></p>
+<p><img src="../../img/conv10.png" alt="conv10"></p>
+<p><img src="../../img/conv17.png" alt="conv17"></p>
+<p><img src="../../img/conv28.png" alt="conv28"></p>
+<h2 id="总结">总结：</h2>
+<p>从可视化中可以看出一些端倪：</p>
+<ul>
+<li>在同一卷积层中会出现少量的可视化卷积核是空白或者相同，这意味着<strong>该卷积核对后续的操作并没有产生实际的作用</strong>（卷积核冗余），可以通过Dropout这些卷积核以减少网络的计算量和减少过度拟合的可能性。</li>
+<li>有部分可视化卷积核可以通过旋转平移，获得另外一个可视化卷积核。这也是卷积层的特性这是一个很有趣的研究方向，我们或许可以通过寻找一种旋转不变性的方法来潜在地代替网络层中的其他卷积核，从而压缩积核的数量。</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">杨浩伟</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2023-02-14
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/cnn%E5%8F%AF%E8%A7%86%E5%8C%96/">CNN可视化</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/kd/">
+            <span class="next-text nav-default">KD</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>杨浩伟</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
