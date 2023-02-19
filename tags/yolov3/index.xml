@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>YOLOv3 on Yang’s Blog</title>
-    <link>https://hackeryhw.github.io/tags/yolov3/</link>
+    <link>/tags/yolov3/</link>
     <description>Recent content in YOLOv3 on Yang’s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 08 Feb 2023 09:27:55 +0800</lastBuildDate><atom:link href="https://hackeryhw.github.io/tags/yolov3/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Feb 2023 09:27:55 +0800</lastBuildDate><atom:link href="/tags/yolov3/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>YOLOv3&#43;Spp源码详解</title>
-      <link>https://hackeryhw.github.io/post/yolov3resource/</link>
+      <link>/post/yolov3resource/</link>
       <pubDate>Wed, 08 Feb 2023 09:27:55 +0800</pubDate>
       
-      <guid>https://hackeryhw.github.io/post/yolov3resource/</guid>
+      <guid>/post/yolov3resource/</guid>
       <description>训练脚本详解： train函数 全部工作： 参数复制 图片大小设置：设置成32的倍数；多尺度训练问题。 模型问题：初始化模型；冻结参数。 优化器、混合精</description>
     </item>
     

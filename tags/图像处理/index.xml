@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>图像处理 on Yang’s Blog</title>
-    <link>https://hackeryhw.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</link>
+    <link>/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</link>
     <description>Recent content in 图像处理 on Yang’s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 14 Feb 2023 17:02:10 +0800</lastBuildDate><atom:link href="https://hackeryhw.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 14 Feb 2023 17:02:10 +0800</lastBuildDate><atom:link href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>为什么图像范围限制多用clip而不是等比缩放至0~255范围？</title>
-      <link>https://hackeryhw.github.io/post/clipnotlinear/</link>
+      <link>/post/clipnotlinear/</link>
       <pubDate>Tue, 14 Feb 2023 17:02:10 +0800</pubDate>
       
-      <guid>https://hackeryhw.github.io/post/clipnotlinear/</guid>
+      <guid>/post/clipnotlinear/</guid>
       <description>通过模型产生一个图像矩阵，但是其像素值范围不是严格在0~255的，所以一般用一些方法将其限制在0~255。 clip：直接截取0~255的值，</description>
     </item>
     

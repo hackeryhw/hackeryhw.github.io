@@ -2,107 +2,107 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Yang’s Blog</title>
-    <link>https://hackeryhw.github.io/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on Yang’s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 19 Feb 2023 11:51:33 +0800</lastBuildDate><atom:link href="https://hackeryhw.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Feb 2023 11:51:33 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CNN可视化</title>
-      <link>https://hackeryhw.github.io/tags/cnn%E5%8F%AF%E8%A7%86%E5%8C%96/</link>
+      <link>/tags/cnn%E5%8F%AF%E8%A7%86%E5%8C%96/</link>
       <pubDate>Sun, 19 Feb 2023 11:51:33 +0800</pubDate>
       
-      <guid>https://hackeryhw.github.io/tags/cnn%E5%8F%AF%E8%A7%86%E5%8C%96/</guid>
+      <guid>/tags/cnn%E5%8F%AF%E8%A7%86%E5%8C%96/</guid>
       <description></description>
     </item>
     
     <item>
       <title>图像处理</title>
-      <link>https://hackeryhw.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</link>
+      <link>/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</link>
       <pubDate>Tue, 14 Feb 2023 17:02:10 +0800</pubDate>
       
-      <guid>https://hackeryhw.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</guid>
+      <guid>/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</guid>
       <description></description>
     </item>
     
     <item>
       <title>知识蒸馏</title>
-      <link>https://hackeryhw.github.io/tags/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/</link>
+      <link>/tags/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/</link>
       <pubDate>Mon, 13 Feb 2023 17:16:04 +0800</pubDate>
       
-      <guid>https://hackeryhw.github.io/tags/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/</guid>
+      <guid>/tags/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/</guid>
       <description></description>
     </item>
     
     <item>
       <title>损失函数</title>
-      <link>https://hackeryhw.github.io/tags/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/</link>
+      <link>/tags/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/</link>
       <pubDate>Mon, 13 Feb 2023 14:29:02 +0800</pubDate>
       
-      <guid>https://hackeryhw.github.io/tags/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/</guid>
+      <guid>/tags/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/</guid>
       <description></description>
     </item>
     
     <item>
       <title>汽车原理</title>
-      <link>https://hackeryhw.github.io/tags/%E6%B1%BD%E8%BD%A6%E5%8E%9F%E7%90%86/</link>
+      <link>/tags/%E6%B1%BD%E8%BD%A6%E5%8E%9F%E7%90%86/</link>
       <pubDate>Mon, 13 Feb 2023 11:18:24 +0800</pubDate>
       
-      <guid>https://hackeryhw.github.io/tags/%E6%B1%BD%E8%BD%A6%E5%8E%9F%E7%90%86/</guid>
+      <guid>/tags/%E6%B1%BD%E8%BD%A6%E5%8E%9F%E7%90%86/</guid>
       <description></description>
     </item>
     
     <item>
       <title>低比特量化</title>
-      <link>https://hackeryhw.github.io/tags/%E4%BD%8E%E6%AF%94%E7%89%B9%E9%87%8F%E5%8C%96/</link>
+      <link>/tags/%E4%BD%8E%E6%AF%94%E7%89%B9%E9%87%8F%E5%8C%96/</link>
       <pubDate>Sun, 12 Feb 2023 16:54:02 +0800</pubDate>
       
-      <guid>https://hackeryhw.github.io/tags/%E4%BD%8E%E6%AF%94%E7%89%B9%E9%87%8F%E5%8C%96/</guid>
+      <guid>/tags/%E4%BD%8E%E6%AF%94%E7%89%B9%E9%87%8F%E5%8C%96/</guid>
       <description></description>
     </item>
     
     <item>
       <title>MAC使用</title>
-      <link>https://hackeryhw.github.io/tags/mac%E4%BD%BF%E7%94%A8/</link>
+      <link>/tags/mac%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Wed, 08 Feb 2023 11:31:06 +0800</pubDate>
       
-      <guid>https://hackeryhw.github.io/tags/mac%E4%BD%BF%E7%94%A8/</guid>
+      <guid>/tags/mac%E4%BD%BF%E7%94%A8/</guid>
       <description></description>
     </item>
     
     <item>
       <title>目标检测</title>
-      <link>https://hackeryhw.github.io/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/</link>
+      <link>/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/</link>
       <pubDate>Wed, 08 Feb 2023 10:11:29 +0800</pubDate>
       
-      <guid>https://hackeryhw.github.io/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/</guid>
+      <guid>/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/</guid>
       <description></description>
     </item>
     
     <item>
       <title>YOLOv3</title>
-      <link>https://hackeryhw.github.io/tags/yolov3/</link>
+      <link>/tags/yolov3/</link>
       <pubDate>Wed, 08 Feb 2023 09:27:55 +0800</pubDate>
       
-      <guid>https://hackeryhw.github.io/tags/yolov3/</guid>
+      <guid>/tags/yolov3/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hugo</title>
-      <link>https://hackeryhw.github.io/tags/hugo/</link>
+      <link>/tags/hugo/</link>
       <pubDate>Mon, 06 Feb 2023 17:51:27 +0800</pubDate>
       
-      <guid>https://hackeryhw.github.io/tags/hugo/</guid>
+      <guid>/tags/hugo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>YOLO</title>
-      <link>https://hackeryhw.github.io/tags/yolo/</link>
+      <link>/tags/yolo/</link>
       <pubDate>Fri, 03 Feb 2023 19:53:55 +0800</pubDate>
       
-      <guid>https://hackeryhw.github.io/tags/yolo/</guid>
+      <guid>/tags/yolo/</guid>
       <description></description>
     </item>
     

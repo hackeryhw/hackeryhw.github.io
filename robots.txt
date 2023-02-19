@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://hackeryhw.github.io/sitemap.xml
+Sitemap: sitemap.xml

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>百科 on Yang’s Blog</title>
-    <link>https://hackeryhw.github.io/categories/%E7%99%BE%E7%A7%91/</link>
+    <link>/categories/%E7%99%BE%E7%A7%91/</link>
     <description>Recent content in 百科 on Yang’s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 13 Feb 2023 11:18:24 +0800</lastBuildDate><atom:link href="https://hackeryhw.github.io/categories/%E7%99%BE%E7%A7%91/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Feb 2023 11:18:24 +0800</lastBuildDate><atom:link href="/categories/%E7%99%BE%E7%A7%91/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Car</title>
-      <link>https://hackeryhw.github.io/post/car/</link>
+      <link>/post/car/</link>
       <pubDate>Mon, 13 Feb 2023 11:18:24 +0800</pubDate>
       
-      <guid>https://hackeryhw.github.io/post/car/</guid>
+      <guid>/post/car/</guid>
       <description></description>
     </item>
     
