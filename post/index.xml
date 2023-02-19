@@ -6,7 +6,34 @@
     <description>Recent content in Posts on Yang’s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 19 Feb 2023 11:51:33 +0800</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Feb 2023 15:25:49 +0800</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>二叉树解题总结</title>
+      <link>/post/binarytree/</link>
+      <pubDate>Sun, 19 Feb 2023 15:25:49 +0800</pubDate>
+      
+      <guid>/post/binarytree/</guid>
+      <description>二叉树思维模式： 是否可以通过遍历一遍二叉树得到答案——若可以，用一个traverse函数配合外部变量来完成。 是否可以定义一个递归函数，通过子</description>
+    </item>
+    
+    <item>
+      <title>DP</title>
+      <link>/post/dp/</link>
+      <pubDate>Sun, 19 Feb 2023 15:24:17 +0800</pubDate>
+      
+      <guid>/post/dp/</guid>
+      <description>动态规划解题套路 问题概述： 动态规划问题的一般形式就是求最值。 求最值最好的方法就是穷举。 但是题目千变万化，穷举所有解不是个容易的事。唯有列出状</description>
+    </item>
+    
+    <item>
+      <title>ACM_summary</title>
+      <link>/post/acm_summary/</link>
+      <pubDate>Sun, 19 Feb 2023 15:22:06 +0800</pubDate>
+      
+      <guid>/post/acm_summary/</guid>
+      <description>从整体到细节，自顶向下，从抽象到具体 数据存储 存储方式：数组和链表，其余散列表，堆栈，图和树等都是数组链表的特殊操作而已，API不同。 队列与栈</description>
+    </item>
+    
     <item>
       <title>Grad_CAM详解</title>
       <link>/post/grad_cam/</link>

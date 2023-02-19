@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>ACM_summary - Yang’s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="杨浩伟" /><meta name="description" content="从整体到细节，自顶向下，从抽象到具体 数据存储 存储方式：数组和链表，其余散列表，堆栈，图和树等都是数组链表的特殊操作而已，API不同。 队列与栈" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.110.0 with theme even" />
+
+
+<link rel="canonical" href="/post/acm_summary/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="ACM_summary" />
+<meta property="og:description" content="从整体到细节，自顶向下，从抽象到具体 数据存储 存储方式：数组和链表，其余散列表，堆栈，图和树等都是数组链表的特殊操作而已，API不同。 队列与栈" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/acm_summary/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-19T15:22:06+08:00" />
+<meta property="article:modified_time" content="2023-02-19T15:22:06+08:00" />
+<meta itemprop="name" content="ACM_summary">
+<meta itemprop="description" content="从整体到细节，自顶向下，从抽象到具体 数据存储 存储方式：数组和链表，其余散列表，堆栈，图和树等都是数组链表的特殊操作而已，API不同。 队列与栈"><meta itemprop="datePublished" content="2023-02-19T15:22:06+08:00" />
+<meta itemprop="dateModified" content="2023-02-19T15:22:06+08:00" />
+<meta itemprop="wordCount" content="1423">
+<meta itemprop="keywords" content="常用算法," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ACM_summary"/>
+<meta name="twitter:description" content="从整体到细节，自顶向下，从抽象到具体 数据存储 存储方式：数组和链表，其余散列表，堆栈，图和树等都是数组链表的特殊操作而已，API不同。 队列与栈"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Yang’s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Yang’s Blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">ACM_summary</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-02-19 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"> 数据结构与算法 </a>
+            </div>
+          <span class="more-meta"> 约 1423 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#数据存储">数据存储</a>
+          <ul>
+            <li><a href="#数组">数组：</a></li>
+          </ul>
+        </li>
+        <li><a href="#数据的基本操作">数据的基本操作：</a>
+          <ul>
+            <li><a href="#遍历访问">遍历+访问：</a></li>
+          </ul>
+        </li>
+        <li><a href="#算法本质">算法本质：</a></li>
+        <li><a href="#二叉树系列">二叉树系列：</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>从整体到细节，自顶向下，从抽象到具体</p>
+<h2 id="数据存储">数据存储</h2>
+<p>存储方式：<strong>数组</strong>和<strong>链表</strong>，其余散列表，堆栈，图和树等都是数组链表的特殊操作而已，API不同。</p>
+<ul>
+<li><strong>队列与栈</strong>：既可用数组也可用链表实现，数组实现要注意动态扩容问题，链表实现没有扩容问题，但是需要额外的空间存储节点指针。</li>
+<li><strong>图</strong>：两种表示—邻接表和邻接矩阵。邻接表就是链表，比较节省空间，但是操作效率不高；邻接矩阵就是二维数组，操作迅速并且可以使用矩阵运算，但是图如果比较稀疏的话，会消耗不少内存。</li>
+<li>散列表：通过散列函数把键映射到一个大数组里。存取效率高，但是需解决散列冲突问题。</li>
+<li>树：用数组实现就是堆，通过索引来找儿子父亲。用列表实现就是常见的树，这种方法实现的结构灵活，可以用很多变种。</li>
+</ul>
+<h3 id="数组">数组：</h3>
+<ul>
+<li>优点：连续存储，<strong>随机访问</strong>；</li>
+<li>缺点：因为分配空间连续，所以扩容麻烦；数组中插入删除复杂度高。</li>
+</ul>
+<p><strong>链表</strong>：</p>
+<ul>
+<li>优点：元素不连续，不存在扩容问题，插入删除复杂度低。</li>
+<li>缺点：只能顺序访问，而且消耗空间存储节点指针。</li>
+</ul>
+<h2 id="数据的基本操作">数据的基本操作：</h2>
+<p>数据的操作只有几个：<strong>遍历+访问</strong>，遍历+访问就是为了增删改查。</p>
+<p>那么多种数据结构就是为了在不同的场景下，尽可能搞笑的增删改查。</p>
+<h3 id="遍历访问">遍历+访问：</h3>
+<p>遍历和访问就两种形式：线性的和非线性的。线性就是 for/while 迭代为代表，非线性就是递归为代表。</p>
+<p>数组的线性遍历</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">viod</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span><span class="p">(</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">a</span><span class="p">:</span><span class="n">arr</span><span class="p">){}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>链表的两种遍历</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Node</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">node</span> <span class="o">*</span> <span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//递归
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">viod</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span> <span class="n">head</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  	<span class="n">traverse</span><span class="p">(</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 迭代
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">viod</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span> <span class="n">head</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  	<span class="k">for</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span><span class="n">tmp</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">;</span><span class="n">tmp</span><span class="o">=</span><span class="n">tmp</span><span class="p">.</span><span class="n">next</span><span class="p">){}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>二叉树的遍历：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Node</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Node</span> <span class="o">*</span> <span class="n">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Node</span> <span class="o">*</span> <span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">viod</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="n">head</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="n">traverse</span><span class="p">(</span><span class="n">head</span><span class="p">.</span><span class="n">left</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">traverse</span><span class="p">(</span><span class="n">head</span><span class="p">.</span><span class="n">right</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>链表和二叉树的非线性遍历是不是差不多，他们结构是不是也很相似呢？如果再多几叉，你又会不会呢？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Node</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">vector</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">*&gt;</span> <span class="n">children</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="n">head</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">child</span> <span class="p">:</span> <span class="n">head</span><span class="p">.</span><span class="n">children</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">traverse</span><span class="p">(</span><span class="n">child</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>图又是几个N叉树的结合体，图的代码是不是又是一样呢？图还有环，用<code>visited</code>数组标记一下是不是就没问题了。</p>
+<h2 id="算法本质">算法本质：</h2>
+<p>算法的本质就是<strong>穷举</strong>。why？计算机设计出来就是用来供人们计算的，计算机的特点就是<strong>快</strong>，你算一圈，人家算几万圈。所以计算机解决问题的思路就是大道至简—穷举。</p>
+<p>这跟数学的思维不一样的，数学题一般自信官产，找关系，列方程。如果说需要进行大量穷举来寻找答案，那这题八成是写错了。</p>
+<p>而计算机解决问题的思维恰恰相反，人类你们去总结公式吧，总结出来更好，总结不出来我们就穷举吧。</p>
+<p>不要觉得穷举这件事很简单，穷举关键点：<strong>无遗漏</strong>，<strong>无冗余</strong>。</p>
+<p>遗漏会导致答案错误，冗余会拖慢算法运行效率。</p>
+<p>前者对应<strong>如何穷举的问题</strong>，后者对应<strong>如何聪明的穷举</strong>。</p>
+<p>如何穷举一般对应暴力解法，通过暴力解决问题。</p>
+<p>如何聪明的穷举一般对应动态规划，查并集，贪心算法。</p>
+<h2 id="二叉树系列">二叉树系列：</h2>
+<p>二叉树递归解法的两种思路：</p>
+<ul>
+<li>遍历二叉树得出答案——回溯算法</li>
+<li>通过分解问题计算出答案——动态规划</li>
+</ul>
+<p>二叉树解法注意——<strong>前中后</strong>序遍历的不同效果。</p>
+<p>通过二叉树最大深度的问题来引出<strong>什么叫通过遍历一遍二叉树得出答案</strong>和<strong>什么叫通过分解问题计算答案</strong>？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">//遍历
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 记录最大深度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">depth</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 主函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">maxDepth</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">traverse</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">res</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 二叉树遍历框架
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">traverse</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// 到达叶子节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="n">res</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">res</span><span class="o">,</span> <span class="n">depth</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 前序遍历位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">depth</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">traverse</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">depth</span><span class="o">--;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">depth</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">traverse</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 后序遍历位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">depth</span><span class="o">--;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 分解问题
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 定义：输入根节点，返回这棵二叉树的最大深度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">maxDepth</span><span class="o">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="n">nullptr</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">      	<span class="c1">// 这里不用搞的那么抽象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      	<span class="c1">// 只用想：函数返回值就是我所定义的东西
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      	<span class="c1">// 然后拿到函数返回值操作，操作出你想要的东西，然后返回即可。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">maxDepth</span><span class="o">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="n">maxDepth</span><span class="o">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">max</span><span class="o">(</span><span class="n">left</span><span class="o">,</span><span class="n">right</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">杨浩伟</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2023-02-19
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95/">常用算法</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/dp/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">DP</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/grad_cam/">
+            <span class="next-text nav-default">Grad_CAM详解</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>杨浩伟</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

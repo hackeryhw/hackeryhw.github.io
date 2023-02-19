@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>DP - Yang’s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="杨浩伟" /><meta name="description" content="动态规划解题套路 问题概述： 动态规划问题的一般形式就是求最值。 求最值最好的方法就是穷举。 但是题目千变万化，穷举所有解不是个容易的事。唯有列出状" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.110.0 with theme even" />
+
+
+<link rel="canonical" href="/post/dp/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="DP" />
+<meta property="og:description" content="动态规划解题套路 问题概述： 动态规划问题的一般形式就是求最值。 求最值最好的方法就是穷举。 但是题目千变万化，穷举所有解不是个容易的事。唯有列出状" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/dp/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-19T15:24:17+08:00" />
+<meta property="article:modified_time" content="2023-02-19T15:24:17+08:00" />
+<meta itemprop="name" content="DP">
+<meta itemprop="description" content="动态规划解题套路 问题概述： 动态规划问题的一般形式就是求最值。 求最值最好的方法就是穷举。 但是题目千变万化，穷举所有解不是个容易的事。唯有列出状"><meta itemprop="datePublished" content="2023-02-19T15:24:17+08:00" />
+<meta itemprop="dateModified" content="2023-02-19T15:24:17+08:00" />
+<meta itemprop="wordCount" content="1229">
+<meta itemprop="keywords" content="常用算法," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="DP"/>
+<meta name="twitter:description" content="动态规划解题套路 问题概述： 动态规划问题的一般形式就是求最值。 求最值最好的方法就是穷举。 但是题目千变万化，穷举所有解不是个容易的事。唯有列出状"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Yang’s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Yang’s Blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">DP</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-02-19 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"> 数据结构与算法 </a>
+            </div>
+          <span class="more-meta"> 约 1229 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#动态规划解题套路">动态规划解题套路</a>
+          <ul>
+            <li><a href="#问题概述">问题概述：</a></li>
+          </ul>
+        </li>
+        <li><a href="#总结">总结：</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="动态规划解题套路">动态规划解题套路</h2>
+<h3 id="问题概述">问题概述：</h3>
+<p>动态规划问题的一般形式就是<strong>求最值</strong>。</p>
+<p>求最值最好的方法就是<strong>穷举</strong>。</p>
+<p>但是题目千变万化，穷举所有解不是个容易的事。唯有<strong>列出状态转移方程</strong>，才能穷举完成。只要列出状态转移方程，就意味着按照状态转移方程，闭着眼睛也能完成穷举（base case + 方程）。</p>
+<p>但是穷举复杂度太高了呀，这时候我们就需要动态规划了。使用动态规划需要判断是否具有<strong>最优子结构</strong>和<strong>重叠子问题</strong>。有了这两个性质，我们就可以使用<strong>备忘录</strong>或者<strong>DP表</strong>来优化穷举过程。</p>
+<blockquote>
+<p><strong>最优子问题</strong>：最优子问题是一类问题的性质，并不是动态规划所专有的。具有这种性质的问题，可以从子问题的最优结果推出更大规模问题的最优结果。</p>
+<p>举个很容易理解的例子：假设你们学校有 10 个班，你已经计算出了每个班的最高考试成绩。那么现在我要求你计算全校最高的成绩，你会不会算？当然会，而且你不用重新遍历全校学生的分数进行比较，而是只要在这 10 个最高成绩中取最大的就是全校的最高成绩。</p>
+<p>如果一个问题没有最优子结构，那我们就<strong>改造问题</strong>。</p>
+<p>再举个例子：假设你们学校有 10 个班，你已知每个班的最大分数差（最高分和最低分的差值）。那么现在我让你计算全校学生中的最大分数差，你会不会算？可以想办法算，但是肯定不能通过已知的这 10 个班的最大分数差推到出来。因为这 10 个班的最大分数差不一定就包含全校学生的最大分数差，比如全校的最大分数差可能是 3 班的最高分和 6 班的最低分之差。</p>
+<p>改造问题，也就是把问题等价转化：最大分数差，不就等价于最高分数和最低分数的差么，那不就是要求最高和最低分数么，不就是我们讨论的第一个问题么，不就具有最优子结构了么？</p>
+<p><strong>重叠子问题</strong>：有了最优子结构，我们就能使用穷举来解决问题。只有拥有了重叠子问题，这个问题才能用动态规划来做。</p>
+</blockquote>
+<p>动态规划的问题核心还是在于状态转移矩阵，写出状态转移方程，代表着这个题目你有解法，但是可能不是最优的。</p>
+<p>如何写出状态转移方程呢？</p>
+<p><strong>明确 base case -&gt; 明确「状态」-&gt; 明确「选择」 -&gt; 定义 <code>dp</code> 数组/函数的含义</strong>。</p>
+<blockquote>
+<p>明确状态的重要性：状态转移矩阵就是各个状态之间的变化，只有了然所有的状态，才能写出正确的方程。</p>
+<p>选择的重要性：选择也叫动作，动作是各个状态转移的依据。只有知道动作，才能知道大问题与哪些子问题有关。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">dp</span><span class="p">(</span><span class="n">状态1</span><span class="o">....</span><span class="n">状态n</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="n">选择</span> <span class="ow">in</span> <span class="n">所有可能的选择</span><span class="err">：</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 这个状态就是因为选择而牵扯进来的状态</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span> <span class="o">=</span> <span class="n">求最值</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="n">dp</span><span class="p">(</span><span class="n">状态1</span><span class="o">....</span><span class="n">状态n</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">result</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">base</span> <span class="n">case</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">状态1</span> <span class="ow">in</span> <span class="n">所有状态1取值</span><span class="err">：</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="n">状态2</span> <span class="ow">in</span> <span class="n">所有状态2取值</span><span class="err">：</span>
+</span></span><span class="line"><span class="cl">  		<span class="k">for</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl">    		<span class="n">dp</span><span class="p">[</span><span class="n">状态1</span><span class="p">][</span><span class="n">状态2</span><span class="p">][</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">求最值</span><span class="p">(</span><span class="n">选择1</span><span class="err">，</span><span class="n">选择2</span><span class="o">...</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>递归算法的时间复杂度怎么计算？就是用子问题个数乘以解决一个子问题需要的时间</strong>。</p>
+<p>一般简单的方法直接求最坏复杂度$O(2^n)$，再乘上状态转移矩阵的复杂度。</p>
+<h2 id="总结">总结：</h2>
+<p>动态规划做题流程：</p>
+<ol>
+<li>明确base case</li>
+<li>找出状态和动作或找出重叠最优子问题。</li>
+<li>写出状态转移方程——这必须先写出来，这个不写出来，这个题基本没有头绪。</li>
+<li>找出重叠子问题。</li>
+<li>使用备忘录或者dp表。</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">杨浩伟</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2023-02-19
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95/">常用算法</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/binarytree/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">二叉树解题总结</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/acm_summary/">
+            <span class="next-text nav-default">ACM_summary</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>杨浩伟</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
