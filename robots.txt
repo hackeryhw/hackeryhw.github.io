@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: http://hackeryhw.github.io/sitemap.xml
+Sitemap: https://hackeryhw.github.io/sitemap.xml

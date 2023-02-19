@@ -1,302 +1,302 @@
-<?xml-stylesheet type="text/xsl" href="http://hackeryhw.github.io/sitemap.xsl"?>
+<?xml-stylesheet type="text/xsl" href="https://hackeryhw.github.io/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://hackeryhw.github.io/categories/</loc>
+    <loc>https://hackeryhw.github.io/categories/</loc>
     <lastmod>2023-02-19T11:51:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/tags/cnn%E5%8F%AF%E8%A7%86%E5%8C%96/</loc>
+    <loc>https://hackeryhw.github.io/tags/cnn%E5%8F%AF%E8%A7%86%E5%8C%96/</loc>
     <lastmod>2023-02-19T11:51:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/grad_cam/</loc>
+    <loc>https://hackeryhw.github.io/post/grad_cam/</loc>
     <lastmod>2023-02-19T11:51:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/</loc>
+    <loc>https://hackeryhw.github.io/post/</loc>
     <lastmod>2023-02-19T11:51:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/tags/</loc>
+    <loc>https://hackeryhw.github.io/tags/</loc>
     <lastmod>2023-02-19T11:51:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/</loc>
+    <loc>https://hackeryhw.github.io/</loc>
     <lastmod>2023-02-19T11:51:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/</loc>
+    <loc>https://hackeryhw.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2023-02-19T11:51:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/torch-hook/</loc>
+    <loc>https://hackeryhw.github.io/post/torch-hook/</loc>
     <lastmod>2023-02-14T18:53:28+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</loc>
+    <loc>https://hackeryhw.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</loc>
     <lastmod>2023-02-14T17:02:10+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/clipnotlinear/</loc>
+    <loc>https://hackeryhw.github.io/post/clipnotlinear/</loc>
     <lastmod>2023-02-14T17:02:10+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/cnnvision_1/</loc>
+    <loc>https://hackeryhw.github.io/post/cnnvision_1/</loc>
     <lastmod>2023-02-14T09:07:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/tags/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/</loc>
+    <loc>https://hackeryhw.github.io/tags/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/</loc>
     <lastmod>2023-02-13T17:16:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/kd/</loc>
+    <loc>https://hackeryhw.github.io/post/kd/</loc>
     <lastmod>2023-02-13T17:16:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/tags/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/</loc>
+    <loc>https://hackeryhw.github.io/tags/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/</loc>
     <lastmod>2023-02-13T14:29:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/bce_ce/</loc>
+    <loc>https://hackeryhw.github.io/post/bce_ce/</loc>
     <lastmod>2023-02-13T14:29:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/car/</loc>
+    <loc>https://hackeryhw.github.io/post/car/</loc>
     <lastmod>2023-02-13T11:18:24+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/categories/%E7%99%BE%E7%A7%91/</loc>
+    <loc>https://hackeryhw.github.io/categories/%E7%99%BE%E7%A7%91/</loc>
     <lastmod>2023-02-13T11:18:24+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/tags/%E6%B1%BD%E8%BD%A6%E5%8E%9F%E7%90%86/</loc>
+    <loc>https://hackeryhw.github.io/tags/%E6%B1%BD%E8%BD%A6%E5%8E%9F%E7%90%86/</loc>
     <lastmod>2023-02-13T11:18:24+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/tags/%E4%BD%8E%E6%AF%94%E7%89%B9%E9%87%8F%E5%8C%96/</loc>
+    <loc>https://hackeryhw.github.io/tags/%E4%BD%8E%E6%AF%94%E7%89%B9%E9%87%8F%E5%8C%96/</loc>
     <lastmod>2023-02-12T16:54:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/yasuo/</loc>
+    <loc>https://hackeryhw.github.io/post/yasuo/</loc>
     <lastmod>2023-02-12T16:54:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/tags/mac%E4%BD%BF%E7%94%A8/</loc>
+    <loc>https://hackeryhw.github.io/tags/mac%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2023-02-08T11:31:06+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/hugo_5/</loc>
+    <loc>https://hackeryhw.github.io/post/hugo_5/</loc>
     <lastmod>2023-02-08T11:31:06+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/categories/%E8%BF%90%E7%BB%B4/</loc>
+    <loc>https://hackeryhw.github.io/categories/%E8%BF%90%E7%BB%B4/</loc>
     <lastmod>2023-02-08T11:31:06+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/detector/</loc>
+    <loc>https://hackeryhw.github.io/post/detector/</loc>
     <lastmod>2023-02-08T10:11:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/</loc>
+    <loc>https://hackeryhw.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/</loc>
     <lastmod>2023-02-08T10:11:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/</loc>
+    <loc>https://hackeryhw.github.io/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/</loc>
     <lastmod>2023-02-08T10:11:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/tags/yolov3/</loc>
+    <loc>https://hackeryhw.github.io/tags/yolov3/</loc>
     <lastmod>2023-02-08T09:27:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/yolov3resource/</loc>
+    <loc>https://hackeryhw.github.io/post/yolov3resource/</loc>
     <lastmod>2023-02-08T09:27:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/categories/%E6%BA%90%E7%A0%81%E8%AE%B2%E8%A7%A3/</loc>
+    <loc>https://hackeryhw.github.io/categories/%E6%BA%90%E7%A0%81%E8%AE%B2%E8%A7%A3/</loc>
     <lastmod>2023-02-08T09:27:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/tags/hugo/</loc>
+    <loc>https://hackeryhw.github.io/tags/hugo/</loc>
     <lastmod>2023-02-06T17:51:27+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/hugo_4/</loc>
+    <loc>https://hackeryhw.github.io/post/hugo_4/</loc>
     <lastmod>2023-02-06T17:51:27+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/tags/yolo/</loc>
+    <loc>https://hackeryhw.github.io/tags/yolo/</loc>
     <lastmod>2023-02-03T19:53:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/yolov7/</loc>
+    <loc>https://hackeryhw.github.io/post/yolov7/</loc>
     <lastmod>2023-02-03T19:53:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/yolov6/</loc>
+    <loc>https://hackeryhw.github.io/post/yolov6/</loc>
     <lastmod>2023-02-03T19:53:52+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/yolov5/</loc>
+    <loc>https://hackeryhw.github.io/post/yolov5/</loc>
     <lastmod>2023-02-03T19:53:49+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/yolov4/</loc>
+    <loc>https://hackeryhw.github.io/post/yolov4/</loc>
     <lastmod>2023-02-03T19:53:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/yolov3/</loc>
+    <loc>https://hackeryhw.github.io/post/yolov3/</loc>
     <lastmod>2023-02-03T19:53:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/yolov2/</loc>
+    <loc>https://hackeryhw.github.io/post/yolov2/</loc>
     <lastmod>2023-02-03T19:53:42+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/yolov1/</loc>
+    <loc>https://hackeryhw.github.io/post/yolov1/</loc>
     <lastmod>2023-02-03T19:53:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/categories/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/</loc>
+    <loc>https://hackeryhw.github.io/categories/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/</loc>
     <lastmod>2023-02-03T19:53:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/hugo_2/</loc>
+    <loc>https://hackeryhw.github.io/post/hugo_2/</loc>
     <lastmod>2023-02-03T18:23:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/hugo_3/</loc>
+    <loc>https://hackeryhw.github.io/post/hugo_3/</loc>
     <lastmod>2023-02-03T18:23:15+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://hackeryhw.github.io/post/hugo_1/</loc>
+    <loc>https://hackeryhw.github.io/post/hugo_1/</loc>
     <lastmod>2023-02-03T18:09:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
