@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>MAC使用 on Yang’s Blog</title>
-    <link>http://localhost:1313/tags/mac%E4%BD%BF%E7%94%A8/</link>
+    <link>http://hackeryhw.github.io/tags/mac%E4%BD%BF%E7%94%A8/</link>
     <description>Recent content in MAC使用 on Yang’s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 08 Feb 2023 11:31:06 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/mac%E4%BD%BF%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Feb 2023 11:31:06 +0800</lastBuildDate><atom:link href="http://hackeryhw.github.io/tags/mac%E4%BD%BF%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>MAC系统下Terminal有执行权限时仍然报错 zsh: operation not permitted的解决办法</title>
-      <link>http://localhost:1313/post/hugo_5/</link>
+      <link>http://hackeryhw.github.io/post/hugo_5/</link>
       <pubDate>Wed, 08 Feb 2023 11:31:06 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/hugo_5/</guid>
+      <guid>http://hackeryhw.github.io/post/hugo_5/</guid>
       <description>碰到了一件很离奇的事情，Terminal运行一个自己编写的shell脚本文件，在有chmod 777权限的情况下仍然无法运行。此时的shell</description>
     </item>
     

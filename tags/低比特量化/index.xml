@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>低比特量化 on Yang’s Blog</title>
-    <link>http://localhost:1313/tags/%E4%BD%8E%E6%AF%94%E7%89%B9%E9%87%8F%E5%8C%96/</link>
+    <link>http://hackeryhw.github.io/tags/%E4%BD%8E%E6%AF%94%E7%89%B9%E9%87%8F%E5%8C%96/</link>
     <description>Recent content in 低比特量化 on Yang’s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 12 Feb 2023 16:54:02 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BD%8E%E6%AF%94%E7%89%B9%E9%87%8F%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Feb 2023 16:54:02 +0800</lastBuildDate><atom:link href="http://hackeryhw.github.io/tags/%E4%BD%8E%E6%AF%94%E7%89%B9%E9%87%8F%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>模型压缩</title>
-      <link>http://localhost:1313/post/yasuo/</link>
+      <link>http://hackeryhw.github.io/post/yasuo/</link>
       <pubDate>Sun, 12 Feb 2023 16:54:02 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/yasuo/</guid>
+      <guid>http://hackeryhw.github.io/post/yasuo/</guid>
       <description>模型压缩目的： 减少模型大小 加快训练速度 保持相同精度 模型压缩四件套： 量化 蒸馏 剪枝 二值化 模型低比特量化： 量化基础： 将浮点计算转化成低比特定点计算</description>
     </item>
     
