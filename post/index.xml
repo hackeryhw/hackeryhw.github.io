@@ -6,7 +6,34 @@
     <description>Recent content in Posts on Yang’s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 14 Feb 2023 09:07:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Feb 2023 11:51:33 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Grad_CAM详解</title>
+      <link>http://localhost:1313/post/grad_cam/</link>
+      <pubDate>Sun, 19 Feb 2023 11:51:33 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/grad_cam/</guid>
+      <description>Previous Next &amp;nbsp; &amp;nbsp; Page: /</description>
+    </item>
+    
+    <item>
+      <title>热力图关键：利用register_hook获取梯度</title>
+      <link>http://localhost:1313/post/torch-hook/</link>
+      <pubDate>Tue, 14 Feb 2023 18:53:28 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/torch-hook/</guid>
+      <description>热力图的关键：利用register_hook获取梯度 在Pyorch中，可以利用Hook获取、改变网络中间某一层变量的值和梯度，从而便捷地分析</description>
+    </item>
+    
+    <item>
+      <title>为什么图像范围限制多用clip而不是等比缩放至0~255范围？</title>
+      <link>http://localhost:1313/post/clipnotlinear/</link>
+      <pubDate>Tue, 14 Feb 2023 17:02:10 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/clipnotlinear/</guid>
+      <description>通过模型产生一个图像矩阵，但是其像素值范围不是严格在0~255的，所以一般用一些方法将其限制在0~255。 clip：直接截取0~255的值，</description>
+    </item>
+    
     <item>
       <title>通过梯度上升可视化CNN</title>
       <link>http://localhost:1313/post/cnnvision_1/</link>
@@ -17,7 +44,7 @@
     </item>
     
     <item>
-      <title>KD</title>
+      <title>知识蒸馏KD</title>
       <link>http://localhost:1313/post/kd/</link>
       <pubDate>Mon, 13 Feb 2023 17:16:04 +0800</pubDate>
       

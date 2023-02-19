@@ -6,13 +6,22 @@
     <description>Recent content in Tags on Yang’s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 14 Feb 2023 09:07:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Feb 2023 11:51:33 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CNN可视化</title>
       <link>http://localhost:1313/tags/cnn%E5%8F%AF%E8%A7%86%E5%8C%96/</link>
-      <pubDate>Tue, 14 Feb 2023 09:07:25 +0800</pubDate>
+      <pubDate>Sun, 19 Feb 2023 11:51:33 +0800</pubDate>
       
       <guid>http://localhost:1313/tags/cnn%E5%8F%AF%E8%A7%86%E5%8C%96/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>图像处理</title>
+      <link>http://localhost:1313/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</link>
+      <pubDate>Tue, 14 Feb 2023 17:02:10 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</guid>
       <description></description>
     </item>
     
